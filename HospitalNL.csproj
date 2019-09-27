@@ -64,8 +64,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="addStaff.xaml.cs">
+      <DependentUpon>addStaff.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CompagnieAssurance.cs">
       <DependentUpon>Hospital.tt</DependentUpon>
+    </Compile>
+    <Compile Include="deleteStaff.xaml.cs">
+      <DependentUpon>deleteStaff.xaml</DependentUpon>
     </Compile>
     <Compile Include="Departement.cs">
       <DependentUpon>Hospital.tt</DependentUpon>
@@ -99,6 +105,26 @@
     <Compile Include="TypeLit.cs">
       <DependentUpon>Hospital.tt</DependentUpon>
     </Compile>
+    <Compile Include="updateStaff.xaml.cs">
+      <DependentUpon>updateStaff.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="windowMedicin.xaml.cs">
+      <DependentUpon>windowMedicin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="windowPrepose.xaml.cs">
+      <DependentUpon>windowPrepose.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="windowsAdmin.xaml.cs">
+      <DependentUpon>windowsAdmin.xaml</DependentUpon>
+    </Compile>
+    <Page Include="addStaff.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="deleteStaff.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -121,6 +147,22 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="updateStaff.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windowMedicin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windowPrepose.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windowsAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -167,9 +209,13 @@
       <DependentUpon>Hospital.edmx</DependentUpon>
       <LastGenOutput>Hospital.cs</LastGenOutput>
     </Content>
+    <Resource Include="img\fonde-windows.jpg" />
+    <Resource Include="img\fonde-Small.jpg" />
+    <Resource Include="img\fonde.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
