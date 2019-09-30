@@ -27,10 +27,8 @@
             </Button.Effect>
         </Button>
 
-        <Button x:Name="btnLogout" Content="Supprimer Staff" HorizontalAlignment="Left" Margin="111,410,0,0" VerticalAlignment="Top" Width="215" Height="36" Background="red" FontFamily="Century Gothic" FontWeight="Bold" FontSize="18" Foreground="#fff" BorderBrush="#fff" Click="btnLogout_Click">
-            <Button.Effect>
-                <DropShadowEffect BlurRadius="19" Color="#FFEAEAEA" Direction="320" ShadowDepth="7"/>
-            </Button.Effect>
+        <Button x:Name="btnLogout" Content="Me deconnecter" HorizontalAlignment="Left" Margin="985,604,0,0" VerticalAlignment="Top" Width="146" Height="28" Background="#FFE81616" FontFamily="Century Gothic" FontWeight="Bold" FontSize="14" Foreground="#fff" BorderBrush="#fff" Click="btnLogout_Click">
+            
         </Button>
         <DataGrid x:Name="gridConsultation" HorizontalAlignment="Left" Height="302" Margin="388,191,0,0" VerticalAlignment="Top" Width="743"
                   AutoGenerateColumns="False">
@@ -40,7 +38,7 @@
                 <DataGridTextColumn Header="Prenom" Binding="{Binding Prenom}" />
                 <DataGridTextColumn Header="Specialite" Binding="{Binding Specialite}" />
             </DataGrid.Columns>
-         </DataGrid>
+        </DataGrid>
         <Label x:Name="Titre_Information" Content="Information actuelle du Staff" HorizontalAlignment="Left" Margin="388,140,0,0" VerticalAlignment="Top" Width="486" FontFamily="Century Gothic" FontSize="25" Height="35" Background="{x:Null}" Foreground="White" />
 
 

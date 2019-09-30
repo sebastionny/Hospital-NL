@@ -10,11 +10,15 @@
         <ImageBrush ImageSource="img/fonde.jpg"/>
     </Window.Background>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1165*"/>
+            <ColumnDefinition Width="29*"/>
+        </Grid.ColumnDefinitions>
         <Label x:Name="labUser" Content="Utilisateur" HorizontalAlignment="Left" Margin="116,243,0,0" VerticalAlignment="Top" Width="202" FontFamily="Century Gothic" FontSize="14"/>
         <TextBox x:Name="txtUser" HorizontalAlignment="Left" Height="29" Margin="116,274,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="215" FontFamily="Century Gothic" FontSize="14" BorderBrush="#FF00A1E5" Background="#FFEDFAFF" BorderThickness="1"/>
         <PasswordBox x:Name="txtPass" HorizontalAlignment="Left" Height="29" Margin="116,336,0,0" VerticalAlignment="Top" Width="215" FontFamily="Century Gothic" FontSize="14" BorderBrush="#FF00A1E5" Background="#FFEDFAFF" BorderThickness="1"/>
         <Label x:Name="labPass" Content="Mot de passe" HorizontalAlignment="Left" Margin="116,309,0,0" VerticalAlignment="Top" Width="202" FontFamily="Century Gothic" FontSize="14"/>
-        <Button x:Name="btnLogin" Content="Entrer" HorizontalAlignment="Left" Margin="116,389,0,0" VerticalAlignment="Top" Width="215" Height="36" Background="White" FontFamily="Century Gothic" FontWeight="Bold" FontSize="18" Foreground="#FF009FE3" BorderBrush="#FF009FE3" Click="btnLogin_Click" RenderTransformOrigin="0.5,0.5">
+        <Button x:Name="btnLogin" Content="Entrer" HorizontalAlignment="Left" Margin="116,389,0,0" VerticalAlignment="Top" Width="215" Height="36" Background="White" FontFamily="Century Gothic" FontWeight="Bold" FontSize="18" Foreground="#FF009FE3" BorderBrush="#FF009FE3" Click="btnLogin_Click" RenderTransformOrigin="0.5,0.5" IsDefault="True">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleY="1" ScaleX="1"/>

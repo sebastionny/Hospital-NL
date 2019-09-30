@@ -31,6 +31,8 @@
         <Label x:Name="labInfoNom_Copy1" Content="CH1" HorizontalAlignment="Left" Margin="296,397,0,0" VerticalAlignment="Top" Width="103" FontFamily="Century Gothic" Height="33" Foreground="White" FontSize="16" Background="#6601356E" />
         <Label Content="Date congé:" HorizontalAlignment="Left" Margin="82,466,0,0" VerticalAlignment="Top" Width="130" FontFamily="Century Gothic" Height="33" Foreground="White" FontSize="16" />
         <DatePicker HorizontalAlignment="Left" Margin="208,470,0,0" VerticalAlignment="Top" Width="215" FontFamily="Century Gothic" FontSize="18"/>
+        <Button x:Name="btnLogout" Content="Me deconnecter" HorizontalAlignment="Left" Margin="992,566,0,0" VerticalAlignment="Top" Width="146" Height="28" Background="#FFE81616" FontFamily="Century Gothic" FontWeight="Bold" FontSize="14" Foreground="#fff" BorderBrush="#fff" Click="btnLogout_Click">
+        </Button>
 
     </Grid>
 </Window>
