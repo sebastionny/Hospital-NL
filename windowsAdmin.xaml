@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HospitalNL"
         mc:Ignorable="d"
-        Title="windowsAdmin" Height="680" Width="1200">
+        Title="windowsAdmin" Height="680" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Window.Background>
         <ImageBrush ImageSource="img/fonde.jpg"/>
     </Window.Background>
@@ -26,7 +26,7 @@
                 <DropShadowEffect BlurRadius="19" Color="#FFEAEAEA" Direction="320" ShadowDepth="7"/>
             </Button.Effect>
         </Button>
-        <DataGrid x:Name="gridConsultation" HorizontalAlignment="Left" Height="380" Margin="460,143,0,0" VerticalAlignment="Top" Width="432"/>
+        <DataGrid x:Name="gridConsultation" HorizontalAlignment="Left" Height="359" Margin="410,164,0,0" VerticalAlignment="Top" Width="642"/>
 
 
     </Grid>
