@@ -68,42 +68,52 @@
       <DependentUpon>addStaff.xaml</DependentUpon>
     </Compile>
     <Compile Include="CompagnieAssurance.cs">
-      <DependentUpon>Hospital.tt</DependentUpon>
+      <DependentUpon>HospitalDB.tt</DependentUpon>
     </Compile>
     <Compile Include="deleteStaff.xaml.cs">
       <DependentUpon>deleteStaff.xaml</DependentUpon>
     </Compile>
     <Compile Include="Departement.cs">
-      <DependentUpon>Hospital.tt</DependentUpon>
+      <DependentUpon>HospitalDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DossierAdmission.cs">
-      <DependentUpon>Hospital.tt</DependentUpon>
+      <DependentUpon>HospitalDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Hospital.cs">
+    <Compile Include="HospitalDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Hospital.tt</DependentUpon>
+      <DependentUpon>HospitalDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HospitalDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HospitalDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HospitalDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HospitalDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Lit.cs">
-      <DependentUpon>Hospital.tt</DependentUpon>
+      <DependentUpon>HospitalDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Location.cs">
-      <DependentUpon>Hospital.tt</DependentUpon>
+      <DependentUpon>HospitalDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Medecin.cs">
-      <DependentUpon>Hospital.tt</DependentUpon>
+      <DependentUpon>HospitalDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Parent.cs">
-      <DependentUpon>Hospital.tt</DependentUpon>
+      <DependentUpon>HospitalDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Patient.cs">
-      <DependentUpon>Hospital.tt</DependentUpon>
+      <DependentUpon>HospitalDB.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagrams.cs">
-      <DependentUpon>Hospital.tt</DependentUpon>
+      <DependentUpon>HospitalDB.tt</DependentUpon>
     </Compile>
     <Compile Include="TypeLit.cs">
-      <DependentUpon>Hospital.tt</DependentUpon>
+      <DependentUpon>HospitalDB.tt</DependentUpon>
     </Compile>
     <Compile Include="updateStaff.xaml.cs">
       <DependentUpon>updateStaff.xaml</DependentUpon>
@@ -132,16 +142,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Hospital.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Hospital.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Hospital.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Hospital.edmx</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -182,12 +182,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Hospital.edmx">
+    <EntityDeploy Include="HospitalDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Hospital.Designer.cs</LastGenOutput>
+      <LastGenOutput>HospitalDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Hospital.edmx.diagram">
-      <DependentUpon>Hospital.edmx</DependentUpon>
+    <None Include="HospitalDB.edmx.diagram">
+      <DependentUpon>HospitalDB.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -199,16 +199,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Hospital.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Hospital.Context.cs</LastGenOutput>
-      <DependentUpon>Hospital.edmx</DependentUpon>
-    </Content>
-    <Content Include="Hospital.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Hospital.edmx</DependentUpon>
-      <LastGenOutput>Hospital.cs</LastGenOutput>
-    </Content>
     <Resource Include="img\fonde-windows.jpg" />
     <Resource Include="img\fonde-Small.jpg" />
     <Resource Include="img\fonde.jpg" />
@@ -216,6 +206,17 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="HospitalDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HospitalDB.edmx</DependentUpon>
+      <LastGenOutput>HospitalDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="HospitalDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HospitalDB.edmx</DependentUpon>
+      <LastGenOutput>HospitalDB.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

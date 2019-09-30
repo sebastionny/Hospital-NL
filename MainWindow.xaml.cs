@@ -31,7 +31,7 @@ namespace HospitalNL
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            switch (ValidationError(txtUser.Text , txtPass.Text))
+            switch (ValidationError(txtUser.Text , txtPass.Password.ToString()))
             {
                 case 0:
                     windowsAdmin wadmin = new windowsAdmin();
