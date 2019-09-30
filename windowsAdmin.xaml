@@ -5,28 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HospitalNL"
         mc:Ignorable="d"
-        Title="windowsAdmin" Height="680" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="windowsAdmin" Height="680" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Loaded="Window_Loaded" Activated="Window_Activated">
     <Window.Background>
         <ImageBrush ImageSource="img/fonde.jpg"/>
     </Window.Background>
     <Grid>
         <Label x:Name="MENU" Content="MENU" HorizontalAlignment="Left" Margin="189,240,0,0" VerticalAlignment="Top" Width="60" FontFamily="Century Gothic" FontSize="14" />
-        <Button x:Name="btnAddStaff" Content="Ajouter Staff" HorizontalAlignment="Left" Margin="111,286,0,0" VerticalAlignment="Top" Width="215" Height="36" Background="White" FontFamily="Century Gothic" FontWeight="Bold" FontSize="18" Foreground="#FF009FE3" BorderBrush="#FF009FE3">
+        <Button x:Name="btnAddStaff" Content="Ajouter Staff" HorizontalAlignment="Left" Margin="111,286,0,0" VerticalAlignment="Top" Width="215" Height="36" Background="White" FontFamily="Century Gothic" FontWeight="Bold" FontSize="18" Foreground="#FF009FE3" BorderBrush="#FF009FE3" Click="btnAddStaff_Click">
             <Button.Effect>
                 <DropShadowEffect BlurRadius="19" Color="#FFEAEAEA" Direction="320" ShadowDepth="7"/>
             </Button.Effect>
         </Button>
-        <Button x:Name="btnUpdateStaff" Content="Mettre a jour Staff" HorizontalAlignment="Left" Margin="111,327,0,0" VerticalAlignment="Top" Width="215" Height="36" Background="White" FontFamily="Century Gothic" FontWeight="Bold" FontSize="18" Foreground="#FF009FE3" BorderBrush="#FF009FE3">
+        <Button x:Name="btnUpdateStaff" Content="Mettre a jour Staff" HorizontalAlignment="Left" Margin="111,327,0,0" VerticalAlignment="Top" Width="215" Height="36" Background="White" FontFamily="Century Gothic" FontWeight="Bold" FontSize="18" Foreground="#FF009FE3" BorderBrush="#FF009FE3" Click="btnUpdateStaff_Click">
             <Button.Effect>
                 <DropShadowEffect BlurRadius="19" Color="#FFEAEAEA" Direction="320" ShadowDepth="7"/>
             </Button.Effect>
         </Button>
-        <Button x:Name="btnDeleteStaff" Content="Supprimer Staff" HorizontalAlignment="Left" Margin="111,368,0,0" VerticalAlignment="Top" Width="215" Height="36" Background="White" FontFamily="Century Gothic" FontWeight="Bold" FontSize="18" Foreground="#FF009FE3" BorderBrush="#FF009FE3">
+        <Button x:Name="btnDeleteStaff" Content="Supprimer Staff" HorizontalAlignment="Left" Margin="111,368,0,0" VerticalAlignment="Top" Width="215" Height="36" Background="White" FontFamily="Century Gothic" FontWeight="Bold" FontSize="18" Foreground="#FF009FE3" BorderBrush="#FF009FE3" Click="btnDeleteStaff_Click">
             <Button.Effect>
                 <DropShadowEffect BlurRadius="19" Color="#FFEAEAEA" Direction="320" ShadowDepth="7"/>
             </Button.Effect>
         </Button>
-        <DataGrid x:Name="gridConsultation" HorizontalAlignment="Left" Height="359" Margin="410,164,0,0" VerticalAlignment="Top" Width="642"/>
+
+        <Button x:Name="btnLogout" Content="Supprimer Staff" HorizontalAlignment="Left" Margin="111,410,0,0" VerticalAlignment="Top" Width="215" Height="36" Background="red" FontFamily="Century Gothic" FontWeight="Bold" FontSize="18" Foreground="#fff" BorderBrush="#fff" Click="btnLogout_Click">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="19" Color="#FFEAEAEA" Direction="320" ShadowDepth="7"/>
+            </Button.Effect>
+        </Button>
+        <DataGrid x:Name="gridConsultation" HorizontalAlignment="Left" Height="302" Margin="388,191,0,0" VerticalAlignment="Top" Width="743"
+                  AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding IdMedecin}" />
+                <DataGridTextColumn Header="Nom" Binding="{Binding Nom}" />
+                <DataGridTextColumn Header="Prenom" Binding="{Binding Prenom}" />
+                <DataGridTextColumn Header="Specialite" Binding="{Binding Specialite}" />
+            </DataGrid.Columns>
+         </DataGrid>
+        <Label x:Name="Titre_Information" Content="Information actuelle du Staff" HorizontalAlignment="Left" Margin="388,140,0,0" VerticalAlignment="Top" Width="486" FontFamily="Century Gothic" FontSize="25" Height="35" Background="{x:Null}" Foreground="White" />
 
 
     </Grid>

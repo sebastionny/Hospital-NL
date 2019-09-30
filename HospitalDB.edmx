@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HOSPITALModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HOSPITALModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CompagnieAssurance">
           <Key>
             <PropertyRef Name="IdCompagnie" />
@@ -122,7 +122,7 @@ warning 6002: The table/view 'HOSPITAL.dbo.Lit' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DossierAdmission_Medecin">
+        <Association Name="FK_DossierAdmission_Medecin1">
           <End Role="Medecin" Type="Self.Medecin" Multiplicity="0..1" />
           <End Role="DossierAdmission" Type="Self.DossierAdmission" Multiplicity="*" />
           <ReferentialConstraint>
@@ -216,7 +216,7 @@ warning 6002: The table/view 'HOSPITAL.dbo.Lit' does not have a primary key defi
             <End Role="Location" EntitySet="Location" />
             <End Role="DossierAdmission" EntitySet="DossierAdmission" />
           </AssociationSet>
-          <AssociationSet Name="FK_DossierAdmission_Medecin" Association="Self.FK_DossierAdmission_Medecin">
+          <AssociationSet Name="FK_DossierAdmission_Medecin1" Association="Self.FK_DossierAdmission_Medecin1">
             <End Role="Medecin" EntitySet="Medecin" />
             <End Role="DossierAdmission" EntitySet="DossierAdmission" />
           </AssociationSet>
@@ -241,8 +241,7 @@ warning 6002: The table/view 'HOSPITAL.dbo.Lit' does not have a primary key defi
             <End Role="Patient" EntitySet="Patient" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HOSPITALModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">

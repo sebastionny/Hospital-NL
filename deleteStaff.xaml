@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HospitalNL"
         mc:Ignorable="d"
-        Title="deleteStaff" Height="450" Width="400">
+        Title="deleteStaff" Height="450" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Window.Background>
         <ImageBrush ImageSource="img/fonde-Small.jpg"/>
     </Window.Background>
@@ -15,11 +15,12 @@
         <Label Content="Prenom" HorizontalAlignment="Left" Margin="40,219,0,0" VerticalAlignment="Top" Width="97" FontFamily="Century Gothic" Height="33" Foreground="White" FontWeight="Bold" FontSize="18" />
         <Label Content="Specialite" HorizontalAlignment="Left" Margin="40,256,0,0" VerticalAlignment="Top" Width="97" FontFamily="Century Gothic" Height="33" Foreground="White" FontWeight="Bold" FontSize="18" />
         <Label x:Name="labId" Content="ID" HorizontalAlignment="Left" Margin="40,106,0,0" VerticalAlignment="Top" Width="309" FontFamily="Century Gothic" Height="33" Foreground="White" FontWeight="Bold" FontSize="18" />
-        <Button x:Name="btnDeleteStaff" Content="Supprimer" HorizontalAlignment="Left" Margin="142,357,0,0" VerticalAlignment="Top" Width="215" Height="36" Background="#FFE81616" FontFamily="Century Gothic" FontWeight="Bold" FontSize="18" Foreground="White" BorderBrush="#FF990404"/>
-        <ComboBox HorizontalAlignment="Left" Margin="40,140,0,0" VerticalAlignment="Top" Width="78" Background="{x:Null}" BorderBrush="#FF003263" Foreground="White"/>
+        <Button x:Name="btnDeleteStaff" Content="Supprimer" HorizontalAlignment="Left" Margin="142,357,0,0" VerticalAlignment="Top" Width="215" Height="36" Background="#FFE81616" FontFamily="Century Gothic" FontWeight="Bold" FontSize="18" Foreground="White" BorderBrush="#FF990404" Click="btnDeleteStaff_Click"/>
         <Label x:Name="labInfoNom" Content="" HorizontalAlignment="Left" Margin="139,181,0,0" VerticalAlignment="Top" Width="227" FontFamily="Century Gothic" Height="33" Foreground="White" FontSize="16" Background="#6601356E" />
         <Label x:Name="labInfoPrenom" Content="" HorizontalAlignment="Left" Margin="139,218,0,0" VerticalAlignment="Top" Width="227" FontFamily="Century Gothic" Height="33" Foreground="White" FontSize="16" Background="#6601356E" />
         <Label x:Name="labInfoSpecialite" Content="" HorizontalAlignment="Left" Margin="139,256,0,0" VerticalAlignment="Top" Width="227" FontFamily="Century Gothic" Height="33" Foreground="White" FontSize="16" Background="#6601356E" />
+        <ComboBox x:Name="cbIdMedecin" HorizontalAlignment="Left" Margin="40,140,0,0" VerticalAlignment="Top" Width="66" Background="White" BorderBrush="{x:Null}" Foreground="#FF003366"
+            IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}" DisplayMemberPath="IdMedecin" FontFamily="Century Gothic" FontWeight="Bold" SelectionChanged="cbIdMedecin_SelectionChanged"/>
 
     </Grid>
 </Window>

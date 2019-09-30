@@ -79,6 +79,7 @@
     <Compile Include="DossierAdmission.cs">
       <DependentUpon>HospitalDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Gestion.cs" />
     <Compile Include="HospitalDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

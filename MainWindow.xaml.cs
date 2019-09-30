@@ -21,6 +21,8 @@ namespace HospitalNL
     public partial class MainWindow : Window
 
     {
+        public static HOSPITALEntities bdHospital = new HOSPITALEntities();
+
         string[,] usersHospital = new string[3, 2]
                 {{"admin","admin" },{"prepose" , "prepose" },{"medecin", "medecin"} };
 
@@ -36,16 +38,19 @@ namespace HospitalNL
                 case 0:
                     windowsAdmin wadmin = new windowsAdmin();
                     wadmin.ShowDialog();
+                    this.Close();
                     break;
 
                 case 1:
                     windowPrepose wpresose = new windowPrepose();
                     wpresose.ShowDialog();
+                    this.Close();
                     break;
 
                 case 2:
                     windowMedicin wmedecin = new windowMedicin();
                     wmedecin.ShowDialog();
+                    this.Close();
                     break;
 
                 default:
