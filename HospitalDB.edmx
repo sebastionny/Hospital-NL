@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DBHospitalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HOSPITALModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CompagnieAssurance">
           <Key>
             <PropertyRef Name="IdCompagnie" />
@@ -24,26 +24,28 @@
             <PropertyRef Name="IdAdmission" />
           </Key>
           <Property Name="IdAdmission" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ChirurgieProg" Type="nchar" MaxLength="50" />
+          <Property Name="ChirurgieProg" Type="bit" />
           <Property Name="DateAdmission" Type="date" />
           <Property Name="DateChirurgie" Type="date" />
           <Property Name="DateConge" Type="date" />
           <Property Name="NSS" Type="int" />
-          <Property Name="NumeroLit" Type="int" />
+          <Property Name="NumeroLit" Type="nchar" MaxLength="10" />
           <Property Name="IdMedecin" Type="int" />
+          <Property Name="IdLocation" Type="int" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HOSPITAL.dbo.Lit' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Lit">
           <Key>
+            <PropertyRef Name="NumeroLit" />
             <PropertyRef Name="NumeroType" />
             <PropertyRef Name="IdDepartement" />
           </Key>
-          <Property Name="NumeroLit" Type="int" Nullable="false" />
+          <Property Name="NumeroLit" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="Occupe" Type="bit" />
           <Property Name="NumeroType" Type="int" Nullable="false" />
           <Property Name="IdDepartement" Type="nchar" MaxLength="10" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBHospital.dbo.Location' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Location">
           <Key>
             <PropertyRef Name="IdLocation" />
@@ -108,7 +110,19 @@ warning 6002: The table/view 'DBHospital.dbo.Location' does not have a primary k
           <Property Name="Description" Type="nchar" MaxLength="100" />
           <Property Name="Prix" Type="money" />
         </EntityType>
-        <Association Name="FK_DossierAdmission_Medecin">
+        <Association Name="FK_DossierAdmission_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="DossierAdmission" Type="Self.DossierAdmission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="IdLocation" />
+            </Principal>
+            <Dependent Role="DossierAdmission">
+              <PropertyRef Name="IdLocation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DossierAdmission_Medecin1">
           <End Role="Medecin" Type="Self.Medecin" Multiplicity="0..1" />
           <End Role="DossierAdmission" Type="Self.DossierAdmission" Multiplicity="*" />
           <ReferentialConstraint>
@@ -180,24 +194,29 @@ warning 6002: The table/view 'DBHospital.dbo.Location' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DBHospitalModelStoreContainer">
+        <EntityContainer Name="HOSPITALModelStoreContainer">
           <EntitySet Name="CompagnieAssurance" EntityType="Self.CompagnieAssurance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Departement" EntityType="Self.Departement" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DossierAdmission" EntityType="Self.DossierAdmission" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Lit" EntityType="Self.Lit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Medecin" EntityType="Self.Medecin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Parent" EntityType="Self.Parent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Patient" EntityType="Self.Patient" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeLit" EntityType="Self.TypeLit" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Location" EntityType="Self.Location" store:Type="Tables" store:Schema="dbo">
+          <EntitySet Name="Lit" EntityType="Self.Lit" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [Location].[IdLocation] AS [IdLocation], 
-    [Location].[Description] AS [Description], 
-    [Location].[Prix] AS [Prix]
-    FROM [dbo].[Location] AS [Location]</DefiningQuery>
+    [Lit].[NumeroLit] AS [NumeroLit], 
+    [Lit].[Occupe] AS [Occupe], 
+    [Lit].[NumeroType] AS [NumeroType], 
+    [Lit].[IdDepartement] AS [IdDepartement]
+    FROM [dbo].[Lit] AS [Lit]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK_DossierAdmission_Medecin" Association="Self.FK_DossierAdmission_Medecin">
+          <AssociationSet Name="FK_DossierAdmission_Location" Association="Self.FK_DossierAdmission_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="DossierAdmission" EntitySet="DossierAdmission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DossierAdmission_Medecin1" Association="Self.FK_DossierAdmission_Medecin1">
             <End Role="Medecin" EntitySet="Medecin" />
             <End Role="DossierAdmission" EntitySet="DossierAdmission" />
           </AssociationSet>
@@ -222,11 +241,10 @@ warning 6002: The table/view 'DBHospital.dbo.Location' does not have a primary k
             <End Role="Patient" EntitySet="Patient" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="DBHospitalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="HOSPITALModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="CompagnieAssurance">
           <Key>
             <PropertyRef Name="IdCompagnie" />
@@ -248,27 +266,26 @@ warning 6002: The table/view 'DBHospital.dbo.Location' does not have a primary k
             <PropertyRef Name="IdAdmission" />
           </Key>
           <Property Name="IdAdmission" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ChirurgieProg" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="ChirurgieProg" Type="Boolean" />
           <Property Name="DateAdmission" Type="DateTime" Precision="0" />
           <Property Name="DateChirurgie" Type="DateTime" Precision="0" />
           <Property Name="DateConge" Type="DateTime" Precision="0" />
           <Property Name="NSS" Type="Int32" />
-          <Property Name="NumeroLit" Type="Int32" />
+          <Property Name="NumeroLit" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="IdMedecin" Type="Int32" />
+          <Property Name="IdLocation" Type="Int32" />
+          <NavigationProperty Name="Location" Relationship="Self.FK_DossierAdmission_Location" FromRole="DossierAdmission" ToRole="Location" />
           <NavigationProperty Name="Medecin" Relationship="Self.FK_DossierAdmission_Medecin" FromRole="DossierAdmission" ToRole="Medecin" />
           <NavigationProperty Name="Patient" Relationship="Self.FK_DossierAdmission_Patient" FromRole="DossierAdmission" ToRole="Patient" />
         </EntityType>
-        <EntityType Name="Lit">
+        <EntityType Name="Location">
           <Key>
-            <PropertyRef Name="NumeroType" />
-            <PropertyRef Name="IdDepartement" />
+            <PropertyRef Name="IdLocation" />
           </Key>
-          <Property Name="NumeroLit" Type="Int32" Nullable="false" />
-          <Property Name="Occupe" Type="Boolean" />
-          <Property Name="NumeroType" Type="Int32" Nullable="false" />
-          <Property Name="IdDepartement" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Departement" Relationship="Self.FK_Lit_Departement" FromRole="Lit" ToRole="Departement" />
-          <NavigationProperty Name="TypeLit" Relationship="Self.FK_Lit_TypeLit" FromRole="Lit" ToRole="TypeLit" />
+          <Property Name="IdLocation" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="80" FixedLength="true" Unicode="true" />
+          <Property Name="Prix" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="DossierAdmission" Relationship="Self.FK_DossierAdmission_Location" FromRole="Location" ToRole="DossierAdmission" />
         </EntityType>
         <EntityType Name="Medecin">
           <Key>
@@ -332,13 +349,18 @@ warning 6002: The table/view 'DBHospital.dbo.Location' does not have a primary k
           <Property Name="Prix" Type="Decimal" Precision="19" Scale="4" />
           <NavigationProperty Name="Lit" Relationship="Self.FK_Lit_TypeLit" FromRole="TypeLit" ToRole="Lit" />
         </EntityType>
-        <EntityType Name="Location">
+        <EntityType Name="Lit">
           <Key>
-            <PropertyRef Name="IdLocation" />
+            <PropertyRef Name="NumeroLit" />
+            <PropertyRef Name="NumeroType" />
+            <PropertyRef Name="IdDepartement" />
           </Key>
-          <Property Name="IdLocation" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Description" Type="String" MaxLength="80" FixedLength="true" Unicode="true" />
-          <Property Name="Prix" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="NumeroLit" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Occupe" Type="Boolean" />
+          <Property Name="NumeroType" Type="Int32" Nullable="false" />
+          <Property Name="IdDepartement" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Departement" Relationship="Self.FK_Lit_Departement" FromRole="Lit" ToRole="Departement" />
+          <NavigationProperty Name="TypeLit" Relationship="Self.FK_Lit_TypeLit" FromRole="Lit" ToRole="TypeLit" />
         </EntityType>
         <Association Name="FK_Patient_CompagnieAssurance">
           <End Role="CompagnieAssurance" Type="Self.CompagnieAssurance" Multiplicity="0..1" />
@@ -361,6 +383,18 @@ warning 6002: The table/view 'DBHospital.dbo.Location' does not have a primary k
             </Principal>
             <Dependent Role="Lit">
               <PropertyRef Name="IdDepartement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DossierAdmission_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="DossierAdmission" Type="Self.DossierAdmission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="IdLocation" />
+            </Principal>
+            <Dependent Role="DossierAdmission">
+              <PropertyRef Name="IdLocation" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -388,18 +422,6 @@ warning 6002: The table/view 'DBHospital.dbo.Location' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Lit_TypeLit">
-          <End Role="TypeLit" Type="Self.TypeLit" Multiplicity="1" />
-          <End Role="Lit" Type="Self.Lit" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TypeLit">
-              <PropertyRef Name="NumeroType" />
-            </Principal>
-            <Dependent Role="Lit">
-              <PropertyRef Name="NumeroType" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Patient_Parent">
           <End Role="Parent" Type="Self.Parent" Multiplicity="0..1" />
           <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
@@ -412,17 +434,29 @@ warning 6002: The table/view 'DBHospital.dbo.Location' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DBHospitalEntities" annotation:LazyLoadingEnabled="true">
+        <Association Name="FK_Lit_TypeLit">
+          <End Role="TypeLit" Type="Self.TypeLit" Multiplicity="1" />
+          <End Role="Lit" Type="Self.Lit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeLit">
+              <PropertyRef Name="NumeroType" />
+            </Principal>
+            <Dependent Role="Lit">
+              <PropertyRef Name="NumeroType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HOSPITALEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CompagnieAssurance" EntityType="Self.CompagnieAssurance" />
           <EntitySet Name="Departement" EntityType="Self.Departement" />
           <EntitySet Name="DossierAdmission" EntityType="Self.DossierAdmission" />
-          <EntitySet Name="Lit" EntityType="Self.Lit" />
+          <EntitySet Name="Location" EntityType="Self.Location" />
           <EntitySet Name="Medecin" EntityType="Self.Medecin" />
           <EntitySet Name="Parent" EntityType="Self.Parent" />
           <EntitySet Name="Patient" EntityType="Self.Patient" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="TypeLit" EntityType="Self.TypeLit" />
-          <EntitySet Name="Location" EntityType="Self.Location" />
+          <EntitySet Name="Lit" EntityType="Self.Lit" />
           <AssociationSet Name="FK_Patient_CompagnieAssurance" Association="Self.FK_Patient_CompagnieAssurance">
             <End Role="CompagnieAssurance" EntitySet="CompagnieAssurance" />
             <End Role="Patient" EntitySet="Patient" />
@@ -430,6 +464,10 @@ warning 6002: The table/view 'DBHospital.dbo.Location' does not have a primary k
           <AssociationSet Name="FK_Lit_Departement" Association="Self.FK_Lit_Departement">
             <End Role="Departement" EntitySet="Departement" />
             <End Role="Lit" EntitySet="Lit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DossierAdmission_Location" Association="Self.FK_DossierAdmission_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="DossierAdmission" EntitySet="DossierAdmission" />
           </AssociationSet>
           <AssociationSet Name="FK_DossierAdmission_Medecin" Association="Self.FK_DossierAdmission_Medecin">
             <End Role="Medecin" EntitySet="Medecin" />
@@ -439,13 +477,13 @@ warning 6002: The table/view 'DBHospital.dbo.Location' does not have a primary k
             <End Role="Patient" EntitySet="Patient" />
             <End Role="DossierAdmission" EntitySet="DossierAdmission" />
           </AssociationSet>
-          <AssociationSet Name="FK_Lit_TypeLit" Association="Self.FK_Lit_TypeLit">
-            <End Role="TypeLit" EntitySet="TypeLit" />
-            <End Role="Lit" EntitySet="Lit" />
-          </AssociationSet>
           <AssociationSet Name="FK_Patient_Parent" Association="Self.FK_Patient_Parent">
             <End Role="Parent" EntitySet="Parent" />
             <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lit_TypeLit" Association="Self.FK_Lit_TypeLit">
+            <End Role="TypeLit" EntitySet="TypeLit" />
+            <End Role="Lit" EntitySet="Lit" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -453,9 +491,9 @@ warning 6002: The table/view 'DBHospital.dbo.Location' does not have a primary k
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DBHospitalModelStoreContainer" CdmEntityContainer="DBHospitalEntities">
+        <EntityContainerMapping StorageEntityContainer="HOSPITALModelStoreContainer" CdmEntityContainer="HOSPITALEntities">
           <EntitySetMapping Name="CompagnieAssurance">
-            <EntityTypeMapping TypeName="DBHospitalModel.CompagnieAssurance">
+            <EntityTypeMapping TypeName="HOSPITALModel.CompagnieAssurance">
               <MappingFragment StoreEntitySet="CompagnieAssurance">
                 <ScalarProperty Name="IdCompagnie" ColumnName="IdCompagnie" />
                 <ScalarProperty Name="NomCompagnie" ColumnName="NomCompagnie" />
@@ -463,7 +501,7 @@ warning 6002: The table/view 'DBHospital.dbo.Location' does not have a primary k
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Departement">
-            <EntityTypeMapping TypeName="DBHospitalModel.Departement">
+            <EntityTypeMapping TypeName="HOSPITALModel.Departement">
               <MappingFragment StoreEntitySet="Departement">
                 <ScalarProperty Name="IdDepartement" ColumnName="IdDepartement" />
                 <ScalarProperty Name="NomDepartement" ColumnName="NomDepartement" />
@@ -471,7 +509,7 @@ warning 6002: The table/view 'DBHospital.dbo.Location' does not have a primary k
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DossierAdmission">
-            <EntityTypeMapping TypeName="DBHospitalModel.DossierAdmission">
+            <EntityTypeMapping TypeName="HOSPITALModel.DossierAdmission">
               <MappingFragment StoreEntitySet="DossierAdmission">
                 <ScalarProperty Name="IdAdmission" ColumnName="IdAdmission" />
                 <ScalarProperty Name="ChirurgieProg" ColumnName="ChirurgieProg" />
@@ -481,21 +519,21 @@ warning 6002: The table/view 'DBHospital.dbo.Location' does not have a primary k
                 <ScalarProperty Name="NSS" ColumnName="NSS" />
                 <ScalarProperty Name="NumeroLit" ColumnName="NumeroLit" />
                 <ScalarProperty Name="IdMedecin" ColumnName="IdMedecin" />
+                <ScalarProperty Name="IdLocation" ColumnName="IdLocation" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Lit">
-            <EntityTypeMapping TypeName="DBHospitalModel.Lit">
-              <MappingFragment StoreEntitySet="Lit">
-                <ScalarProperty Name="NumeroLit" ColumnName="NumeroLit" />
-                <ScalarProperty Name="Occupe" ColumnName="Occupe" />
-                <ScalarProperty Name="NumeroType" ColumnName="NumeroType" />
-                <ScalarProperty Name="IdDepartement" ColumnName="IdDepartement" />
+          <EntitySetMapping Name="Location">
+            <EntityTypeMapping TypeName="HOSPITALModel.Location">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="IdLocation" ColumnName="IdLocation" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Prix" ColumnName="Prix" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Medecin">
-            <EntityTypeMapping TypeName="DBHospitalModel.Medecin">
+            <EntityTypeMapping TypeName="HOSPITALModel.Medecin">
               <MappingFragment StoreEntitySet="Medecin">
                 <ScalarProperty Name="IdMedecin" ColumnName="IdMedecin" />
                 <ScalarProperty Name="Nom" ColumnName="Nom" />
@@ -505,7 +543,7 @@ warning 6002: The table/view 'DBHospital.dbo.Location' does not have a primary k
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Parent">
-            <EntityTypeMapping TypeName="DBHospitalModel.Parent">
+            <EntityTypeMapping TypeName="HOSPITALModel.Parent">
               <MappingFragment StoreEntitySet="Parent">
                 <ScalarProperty Name="RefParent" ColumnName="RefParent" />
                 <ScalarProperty Name="Nom" ColumnName="Nom" />
@@ -519,7 +557,7 @@ warning 6002: The table/view 'DBHospital.dbo.Location' does not have a primary k
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Patient">
-            <EntityTypeMapping TypeName="DBHospitalModel.Patient">
+            <EntityTypeMapping TypeName="HOSPITALModel.Patient">
               <MappingFragment StoreEntitySet="Patient">
                 <ScalarProperty Name="NSS" ColumnName="NSS" />
                 <ScalarProperty Name="DateNaissance" ColumnName="DateNaissance" />
@@ -536,7 +574,7 @@ warning 6002: The table/view 'DBHospital.dbo.Location' does not have a primary k
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="DBHospitalModel.sysdiagrams">
+            <EntityTypeMapping TypeName="HOSPITALModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -547,7 +585,7 @@ warning 6002: The table/view 'DBHospital.dbo.Location' does not have a primary k
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TypeLit">
-            <EntityTypeMapping TypeName="DBHospitalModel.TypeLit">
+            <EntityTypeMapping TypeName="HOSPITALModel.TypeLit">
               <MappingFragment StoreEntitySet="TypeLit">
                 <ScalarProperty Name="NumeroType" ColumnName="NumeroType" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -555,12 +593,13 @@ warning 6002: The table/view 'DBHospital.dbo.Location' does not have a primary k
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Location">
-            <EntityTypeMapping TypeName="DBHospitalModel.Location">
-              <MappingFragment StoreEntitySet="Location">
-                <ScalarProperty Name="IdLocation" ColumnName="IdLocation" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Prix" ColumnName="Prix" />
+          <EntitySetMapping Name="Lit">
+            <EntityTypeMapping TypeName="HOSPITALModel.Lit">
+              <MappingFragment StoreEntitySet="Lit">
+                <ScalarProperty Name="NumeroLit" ColumnName="NumeroLit" />
+                <ScalarProperty Name="Occupe" ColumnName="Occupe" />
+                <ScalarProperty Name="NumeroType" ColumnName="NumeroType" />
+                <ScalarProperty Name="IdDepartement" ColumnName="IdDepartement" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

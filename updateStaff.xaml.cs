@@ -23,5 +23,43 @@ namespace HospitalNL
         {
             InitializeComponent();
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            refresh();
+        }
+        
+
+        private void cbIdMedecin_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Medecin M = ((Medecin)cbIdMedecin.SelectedItem);
+            txtNom.Text = M.Nom.ToString();
+            txtPrenom.Text = M.Prenom.ToString();
+            txtSpecialite.Text = M.Specialite.ToString();
+        }
+
+        private void refresh()
+        {
+            cbIdMedecin.DataContext = MainWindow.bdHospital.Medecin.ToList();
+        }
+
+        private void btnAddStaff_Click(object sender, RoutedEventArgs e)
+        {
+            Medecin M = cbIdMedecin.SelectedItem as Medecin;
+            M.Nom = txtNom.Text;
+            M.Prenom = txtPrenom.Text;
+            M.Specialite = txtSpecialite.Text;
+
+            try
+            {
+                MainWindow.bdHospital.SaveChanges();
+                MessageBox.Show("Modification Fait!", "Ajoute Succes", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
     }
 }

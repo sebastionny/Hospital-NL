@@ -14,8 +14,17 @@ namespace HospitalNL
     
     public partial class Location
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Location()
+        {
+            this.DossierAdmission = new HashSet<DossierAdmission>();
+        }
+    
         public int IdLocation { get; set; }
         public string Description { get; set; }
         public Nullable<decimal> Prix { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DossierAdmission> DossierAdmission { get; set; }
     }
 }

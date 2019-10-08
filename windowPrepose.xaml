@@ -5,67 +5,88 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HospitalNL"
         mc:Ignorable="d"
-        Title="windowPrepose"  Height="650" Width="1200">
+        Title="windowPrepose"  Height="650" Width="1200" Loaded="Window_Loaded">
     <Window.Background>
         <ImageBrush ImageSource="img/fonde-windows.jpg"/>
     </Window.Background>
-    <Grid Margin="0,2,0,-2">
-        <GroupBox Header="  INFORMATION PATIENT  " HorizontalAlignment="Left" Height="203" Margin="606,133,0,0" VerticalAlignment="Top" Width="528.773" Foreground="White" BorderBrush="White" UseLayoutRounding="False"/>
+    <Grid x:Name="containerGroupe" Margin="0,2,0,-2">
+        <GroupBox Header="  INFORMATION PATIENT  " HorizontalAlignment="Left" Height="203" Margin="42,153.11,0,0" VerticalAlignment="Top" Width="501.773" Foreground="White" BorderBrush="White" UseLayoutRounding="False"/>
+        <Label x:Name="titre_Copy" Content="ADMISSION DE NOUVEAU PATIENT" HorizontalAlignment="Left" Margin="629,148,0,0" VerticalAlignment="Top" Width="441" FontFamily="Century Gothic" Height="46" Foreground="White" FontSize="26" />
+        <Label Content="Date naissance" HorizontalAlignment="Left" Margin="59,179,0,0" VerticalAlignment="Top" Width="182" FontFamily="Century Gothic" Height="28" Foreground="White" FontSize="14" />
+        <Label Content="Nom" HorizontalAlignment="Left" Margin="59,207,0,0" VerticalAlignment="Top" Width="51" FontFamily="Century Gothic" Height="27" Foreground="White" FontSize="14" />
+        <Label Content="Prenom" HorizontalAlignment="Left" Margin="59,233,0,0" VerticalAlignment="Top" Width="82" FontFamily="Century Gothic" Height="27" Foreground="White" FontSize="14" />
+        <Label Content="Adresse" HorizontalAlignment="Left" Margin="59,259,0,0" VerticalAlignment="Top" Width="82" FontFamily="Century Gothic" Height="27" Foreground="White" FontSize="14" />
+        <Label Content="Ville" HorizontalAlignment="Left" Margin="294,259,0,0" VerticalAlignment="Top" Width="45" FontFamily="Century Gothic" Height="27" Foreground="White" FontSize="14" />
+        <Label Content="Code Postal" HorizontalAlignment="Left" Margin="294,286,0,0" VerticalAlignment="Top" Width="116" FontFamily="Century Gothic" Height="27" Foreground="White" FontSize="14" />
+        <Label Content="Province" HorizontalAlignment="Left" Margin="59,286,0,0" VerticalAlignment="Top" Width="82" FontFamily="Century Gothic" Height="27" Foreground="White" FontSize="14" />
+        <Label Content="Téléphone" HorizontalAlignment="Left" Margin="59,313,0,0" VerticalAlignment="Top" Width="96" FontFamily="Century Gothic" Height="27" Foreground="White" FontSize="14" />
+        <Label Content="ID Assurance" HorizontalAlignment="Left" Margin="294,231,0,0" VerticalAlignment="Top" Width="116" FontFamily="Century Gothic" Height="27" Foreground="White" FontSize="14" />
+        <GroupBox Header="  INFORMATION PARENT  " HorizontalAlignment="Left" Height="159" Margin="41,367,0,0" VerticalAlignment="Top" Width="506" Foreground="White"/>
+        <Label Content="Ref Parent" HorizontalAlignment="Left" Margin="294,316,0,0" VerticalAlignment="Top" Width="95" FontFamily="Century Gothic" Height="27" Foreground="White" FontSize="14" />
+        <Label Content="Nom" HorizontalAlignment="Left" Margin="59,399,0,0" VerticalAlignment="Top" Width="51" FontFamily="Century Gothic" Height="27" Foreground="White" FontSize="14" />
+        <Label Content="Prenom" HorizontalAlignment="Left" Margin="276,399,0,0" VerticalAlignment="Top" Width="76" FontFamily="Century Gothic" Height="27" Foreground="White" FontSize="14" />
+        <Label Content="Adresse" HorizontalAlignment="Left" Margin="59,428,0,0" VerticalAlignment="Top" Width="75" FontFamily="Century Gothic" Height="27" Foreground="White" FontSize="14" />
+        <Label Content="Ville" HorizontalAlignment="Left" Margin="277,456,0,0" VerticalAlignment="Top" Width="56" FontFamily="Century Gothic" Height="27" Foreground="White" FontSize="14" />
+        <Label Content="Code Postal" HorizontalAlignment="Left" Margin="57,487,0,0" VerticalAlignment="Top" Width="106" FontFamily="Century Gothic" Height="27" Foreground="White" FontSize="14" />
+        <Label Content="Province" HorizontalAlignment="Left" Margin="59,455,0,0" VerticalAlignment="Top" Width="82" FontFamily="Century Gothic" Height="27" Foreground="White" FontSize="14" />
+        <Label Content="Téléphone" HorizontalAlignment="Left" Margin="276,430,0,0" VerticalAlignment="Top" Width="96" FontFamily="Century Gothic" Height="27" Foreground="White" FontSize="14" />
+        <TextBox x:Name="txtNomParent" HorizontalAlignment="Left" Height="20" Margin="116,403,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontFamily="Century Gothic" FontSize="14" BorderBrush="White" Background="{x:Null}" BorderThickness="1" Foreground="White"/>
+        <TextBox x:Name="txtPrenomParent" HorizontalAlignment="Left" Height="20" Margin="358,403,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164" FontFamily="Century Gothic" FontSize="14" BorderBrush="White" Background="{x:Null}" BorderThickness="1" Foreground="White"/>
+        <TextBox x:Name="txtAdresseParent" HorizontalAlignment="Left" Height="20" Margin="134,432,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="136" FontFamily="Century Gothic" FontSize="14" BorderBrush="White" Background="{x:Null}" BorderThickness="1" Foreground="White"/>
+        <TextBox x:Name="txtTeleParent" HorizontalAlignment="Left" Height="20" Margin="375,433,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="146" FontFamily="Century Gothic" FontSize="14" BorderBrush="White" Background="{x:Null}" BorderThickness="1" Foreground="White"/>
+        <TextBox x:Name="txtProvinceParent" HorizontalAlignment="Left" Height="20" Margin="141,460,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="129" FontFamily="Century Gothic" FontSize="14" BorderBrush="White" Background="{x:Null}" BorderThickness="1" Foreground="White"/>
+        <TextBox x:Name="txtVilleParent" HorizontalAlignment="Left" Height="20" Margin="333,459,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188" FontFamily="Century Gothic" FontSize="14" BorderBrush="White" Background="{x:Null}" BorderThickness="1" Foreground="White"/>
+        <TextBox x:Name="txtCodeParent" HorizontalAlignment="Left" Height="20" Margin="169,490,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="101" FontFamily="Century Gothic" FontSize="14" BorderBrush="White" Background="{x:Null}" BorderThickness="1" Foreground="White"/>
+        <Button x:Name="btnAjouterPatiet" Content="AJOUTER PATIENT" HorizontalAlignment="Left" Margin="375,547,0,0" VerticalAlignment="Top" Width="169" Height="30" Background="#FF7EC109" FontFamily="Century Gothic" Foreground="White" BorderBrush="#FF6BA801" FontSize="14" FontWeight="Bold"/>
 
-        <Label x:Name="titre" Content="Bienvenue" HorizontalAlignment="Left" Margin="40,38,0,0" VerticalAlignment="Top" Width="326" FontFamily="Century Gothic" Height="32" Foreground="White" FontWeight="Bold" FontSize="18" />
-        <Button x:Name="btnDonnerConge" Content="AJOUTER PATIENT" HorizontalAlignment="Left" Margin="896,343,0,0" VerticalAlignment="Top" Width="240" Height="30" Background="#FF7EC109" FontFamily="Century Gothic" Foreground="White" BorderBrush="#FF6BA801" FontSize="14" FontWeight="Bold"/>
-        <Label x:Name="labPrenom" Content="Préposé M. Trudeau" HorizontalAlignment="Left" Margin="40,61,0,0" VerticalAlignment="Top" Width="326" FontFamily="Century Gothic" Height="32" Foreground="White" FontSize="21" />
-        <Label x:Name="titre_Copy" Content="ADMISSION DE NOUVEAU PATIENT" HorizontalAlignment="Left" Margin="40,93,0,0" VerticalAlignment="Top" Width="441" FontFamily="Century Gothic" Height="46" Foreground="White" FontSize="26" />
-        <Label Content="Date naissance" HorizontalAlignment="Left" Margin="624,159,0,0" VerticalAlignment="Top" Width="192" FontFamily="Century Gothic" Height="28" Foreground="White" FontSize="14" />
-        <Label Content="Nom" HorizontalAlignment="Left" Margin="624,187,0,0" VerticalAlignment="Top" Width="54" FontFamily="Century Gothic" Height="27" Foreground="White" FontSize="14" />
-        <Label Content="Prenom" HorizontalAlignment="Left" Margin="624,213,0,0" VerticalAlignment="Top" Width="86" FontFamily="Century Gothic" Height="27" Foreground="White" FontSize="14" />
-        <Label Content="Adresse" HorizontalAlignment="Left" Margin="624,239,0,0" VerticalAlignment="Top" Width="86" FontFamily="Century Gothic" Height="27" Foreground="White" FontSize="14" />
-        <Label Content="Ville" HorizontalAlignment="Left" Margin="872,239,0,0" VerticalAlignment="Top" Width="47" FontFamily="Century Gothic" Height="27" Foreground="White" FontSize="14" />
-        <Label Content="Code Postal" HorizontalAlignment="Left" Margin="872,266,0,0" VerticalAlignment="Top" Width="122" FontFamily="Century Gothic" Height="27" Foreground="White" FontSize="14" />
-        <Label Content="Province" HorizontalAlignment="Left" Margin="624,266,0,0" VerticalAlignment="Top" Width="86" FontFamily="Century Gothic" Height="27" Foreground="White" FontSize="14" />
-        <Label Content="Téléphone" HorizontalAlignment="Left" Margin="624,293,0,0" VerticalAlignment="Top" Width="101" FontFamily="Century Gothic" Height="27" Foreground="White" FontSize="14" />
-        <Label Content="ID Assurance" HorizontalAlignment="Left" Margin="872,211,0,0" VerticalAlignment="Top" Width="122" FontFamily="Century Gothic" Height="27" Foreground="White" FontSize="14" />
-        <GroupBox Header="  INFORMATION PARENT  " HorizontalAlignment="Left" Height="191" Margin="40,140,0,0" VerticalAlignment="Top" Width="506" Foreground="White"/>
-        <Label Content="Ref Parent" HorizontalAlignment="Left" Margin="872,296,0,0" VerticalAlignment="Top" Width="100" FontFamily="Century Gothic" Height="27" Foreground="White" FontSize="14" />
-        <Label Content="Nom" HorizontalAlignment="Left" Margin="58,176,0,0" VerticalAlignment="Top" Width="51" FontFamily="Century Gothic" Height="27" Foreground="White" FontSize="14" />
-        <Label Content="Prenom" HorizontalAlignment="Left" Margin="275,176,0,0" VerticalAlignment="Top" Width="76" FontFamily="Century Gothic" Height="27" Foreground="White" FontSize="14" />
-        <Label Content="Adresse" HorizontalAlignment="Left" Margin="58,214,0,0" VerticalAlignment="Top" Width="75" FontFamily="Century Gothic" Height="27" Foreground="White" FontSize="14" />
-        <Label Content="Ville" HorizontalAlignment="Left" Margin="276,250,0,0" VerticalAlignment="Top" Width="56" FontFamily="Century Gothic" Height="27" Foreground="White" FontSize="14" />
-        <Label Content="Code Postal" HorizontalAlignment="Left" Margin="56,287,0,0" VerticalAlignment="Top" Width="106" FontFamily="Century Gothic" Height="27" Foreground="White" FontSize="14" />
-        <Label Content="Province" HorizontalAlignment="Left" Margin="58,249,0,0" VerticalAlignment="Top" Width="82" FontFamily="Century Gothic" Height="27" Foreground="White" FontSize="14" />
-        <Label Content="Téléphone" HorizontalAlignment="Left" Margin="275,216,0,0" VerticalAlignment="Top" Width="96" FontFamily="Century Gothic" Height="27" Foreground="White" FontSize="14" />
-        <Button x:Name="btnDonnerConge_Copy" Content="AJOUTER PARENT" HorizontalAlignment="Left" Margin="317,340,0,0" VerticalAlignment="Top" Width="230" Height="30" Background="#FF7EC109" FontFamily="Century Gothic" Foreground="White" BorderBrush="#FF6BA801" FontSize="14" FontWeight="Bold"/>
-        <TextBox x:Name="txtNomParent" HorizontalAlignment="Left" Height="20" Margin="115,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontFamily="Century Gothic" FontSize="14" BorderBrush="White" Background="{x:Null}" BorderThickness="1" Foreground="White"/>
-        <TextBox x:Name="txtPrenomParent" HorizontalAlignment="Left" Height="20" Margin="357,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164" FontFamily="Century Gothic" FontSize="14" BorderBrush="White" Background="{x:Null}" BorderThickness="1" Foreground="White"/>
-        <TextBox x:Name="txtAdresseParent" HorizontalAlignment="Left" Height="20" Margin="133,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="136" FontFamily="Century Gothic" FontSize="14" BorderBrush="White" Background="{x:Null}" BorderThickness="1" Foreground="White"/>
-        <TextBox x:Name="txtTeleParent" HorizontalAlignment="Left" Height="20" Margin="374,219,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="146" FontFamily="Century Gothic" FontSize="14" BorderBrush="White" Background="{x:Null}" BorderThickness="1" Foreground="White"/>
-        <TextBox x:Name="txtProvinceParent" HorizontalAlignment="Left" Height="20" Margin="140,254,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="129" FontFamily="Century Gothic" FontSize="14" BorderBrush="White" Background="{x:Null}" BorderThickness="1" Foreground="White"/>
-        <TextBox x:Name="txtVilleParent" HorizontalAlignment="Left" Height="20" Margin="332,253,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188" FontFamily="Century Gothic" FontSize="14" BorderBrush="White" Background="{x:Null}" BorderThickness="1" Foreground="White"/>
-        <TextBox x:Name="txtCodeParent" HorizontalAlignment="Left" Height="20" Margin="168,290,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="101" FontFamily="Century Gothic" FontSize="14" BorderBrush="White" Background="{x:Null}" BorderThickness="1" Foreground="White"/>
-        <DatePicker x:Name="dateNaissancePatient" HorizontalAlignment="Left" Margin="774,161,0,0" VerticalAlignment="Top" Width="264" FontFamily="Century Gothic" FontSize="14"/>
-        <TextBox x:Name="txtNomPatient" HorizontalAlignment="Left" Height="20" Margin="720,191,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" FontFamily="Century Gothic" FontSize="14" BorderBrush="White" Background="{x:Null}" BorderThickness="1" Foreground="White"/>
-        <TextBox x:Name="txtPrenomPatient" HorizontalAlignment="Left" Height="20" Margin="720,216,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" FontFamily="Century Gothic" FontSize="14" BorderBrush="White" Background="{x:Null}" BorderThickness="1" Foreground="White"/>
-        <TextBox x:Name="txtAdressePatient" HorizontalAlignment="Left" Height="20" Margin="720,242,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" FontFamily="Century Gothic" FontSize="14" BorderBrush="White" Background="{x:Null}" BorderThickness="1" Foreground="White"/>
-        <ComboBox x:Name="cbAssurancePatient" HorizontalAlignment="Left" Margin="1008,215,0,0" VerticalAlignment="Top" Width="101"/>
-        <TextBox x:Name="txtVillePatient" HorizontalAlignment="Left" Height="20" Margin="956,241,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="152" FontFamily="Century Gothic" FontSize="14" BorderBrush="White" Background="{x:Null}" BorderThickness="1" Foreground="White"/>
-        <TextBox x:Name="txtProvincePatient" HorizontalAlignment="Left" Height="20" Margin="719,269,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="147" FontFamily="Century Gothic" FontSize="14" BorderBrush="White" Background="{x:Null}" BorderThickness="1" Foreground="White"/>
-        <TextBox x:Name="txtCodePostalPatient" HorizontalAlignment="Left" Height="20" Margin="994,269,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="114" FontFamily="Century Gothic" FontSize="14" BorderBrush="White" Background="{x:Null}" BorderThickness="1" Foreground="White"/>
-        <TextBox x:Name="txtTelePatient" HorizontalAlignment="Left" Height="20" Margin="725,296,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="139" FontFamily="Century Gothic" FontSize="14" BorderBrush="White" Background="{x:Null}" BorderThickness="1" Foreground="White"/>
-        <ComboBox x:Name="cbRefPatient" HorizontalAlignment="Left" Margin="978,296,0,0" VerticalAlignment="Top" Width="131"/>
-        <GroupBox Header="  NOUVEAU DOSSIER PATIENT " HorizontalAlignment="Left" Height="118" Margin="610,401,0,0" VerticalAlignment="Top" Width="524.773" Foreground="White" BorderBrush="White" UseLayoutRounding="False"/>
-        <Button x:Name="btnOpenDossier" Content="OUVERT DOSSIER" HorizontalAlignment="Left" Margin="938,533,0,0" VerticalAlignment="Top" Width="196" Height="30" Background="#FFFF9700" FontFamily="Century Gothic" Foreground="White" BorderBrush="#FFA84501" FontSize="14" FontWeight="Bold"/>
-        <Label Content="Date admission" HorizontalAlignment="Left" Margin="622,427,0,0" VerticalAlignment="Top" Width="126" FontFamily="Century Gothic" Height="28" Foreground="White" FontSize="14" />
-        <DatePicker x:Name="dateAdmissionDossier" HorizontalAlignment="Left" Margin="754,429,0,0" VerticalAlignment="Top" Width="148" FontFamily="Century Gothic" FontSize="14"/>
-        <Label Content="NSS Patient" HorizontalAlignment="Left" Margin="924,430,0,0" VerticalAlignment="Top" Width="105" FontFamily="Century Gothic" Height="28" Foreground="White" FontSize="14" />
-        <ComboBox x:Name="cbNSSDossier" HorizontalAlignment="Left" Margin="1029,433,0,0" VerticalAlignment="Top" Width="77"/>
-        <Label Content="ID Médecin" HorizontalAlignment="Left" Margin="622,466,0,0" VerticalAlignment="Top" Width="105" FontFamily="Century Gothic" Height="28" Foreground="White" FontSize="14" />
-        <ComboBox x:Name="cbIDMedecinDossier" HorizontalAlignment="Left" Margin="755,469,0,0" VerticalAlignment="Top" Width="147"/>
-        <Label Content="Numéro Lit" HorizontalAlignment="Left" Margin="924,463,0,0" VerticalAlignment="Top" Width="105" FontFamily="Century Gothic" Height="28" Foreground="White" FontSize="14" />
-        <ComboBox x:Name="cbNumeroLitDossier" HorizontalAlignment="Left" Margin="1029,466,0,0" VerticalAlignment="Top" Width="77"/>
-        <Label x:Name="Recherche" Content="RECHERCHE PATIENT" HorizontalAlignment="Left" Margin="40,403,0,0" VerticalAlignment="Top" Width="441" FontFamily="Century Gothic" Height="46" Foreground="White" FontSize="26" />
-        <TextBox x:Name="txtRecherchePatient" HorizontalAlignment="Left" Height="25" Margin="48,471,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="498" FontFamily="Century Gothic" FontSize="14" BorderBrush="White" Background="#99005D9D" BorderThickness="1" Foreground="White"/>
-        <Button x:Name="btnRecheche" Content="RECHERCHE PATIENT" HorizontalAlignment="Left" Margin="317,514,0,0" VerticalAlignment="Top" Width="229" Height="30" Background="#FFFF9700" FontFamily="Century Gothic" Foreground="White" BorderBrush="#FFA84501" FontSize="14" FontWeight="Bold"/>
-        <Label Content="vous pouvez chercher par ID ou par prenom" HorizontalAlignment="Left" Margin="45,444,0,0" VerticalAlignment="Top" Width="501" FontFamily="Century Gothic" Height="27" Foreground="White" FontSize="14" />
+        <DatePicker x:Name="dateNaissancePatient" HorizontalAlignment="Left" Margin="201,181,0,0" VerticalAlignment="Top" Width="251" FontFamily="Century Gothic" FontSize="14"/>
+        <TextBox x:Name="txtNomPatient" HorizontalAlignment="Left" Height="20" Margin="150,211,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="137" FontFamily="Century Gothic" FontSize="14" BorderBrush="White" Background="{x:Null}" BorderThickness="1" Foreground="White"/>
+        <TextBox x:Name="txtPrenomPatient" HorizontalAlignment="Left" Height="20" Margin="150,236,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="137" FontFamily="Century Gothic" FontSize="14" BorderBrush="White" Background="{x:Null}" BorderThickness="1" Foreground="White"/>
+        <TextBox x:Name="txtAdressePatient" HorizontalAlignment="Left" Height="20" Margin="150,262,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="137" FontFamily="Century Gothic" FontSize="14" BorderBrush="White" Background="{x:Null}" BorderThickness="1" Foreground="White"/>
+        <ComboBox x:Name="cbAssurancePatient" HorizontalAlignment="Left" Margin="395,235,0,0" VerticalAlignment="Top" Width="124"
+                 IsSynchronizedWithCurrentItem="True"  ItemsSource="{Binding}" DisplayMemberPath="NomCompagnie"/>
+        <TextBox x:Name="txtVillePatient" HorizontalAlignment="Left" Height="20" Margin="374,261,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" FontFamily="Century Gothic" FontSize="14" BorderBrush="White" Background="{x:Null}" BorderThickness="1" Foreground="White"/>
+        <TextBox x:Name="txtProvincePatient" HorizontalAlignment="Left" Height="20" Margin="149,289,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" FontFamily="Century Gothic" FontSize="14" BorderBrush="White" Background="{x:Null}" BorderThickness="1" Foreground="White"/>
+        <TextBox x:Name="txtCodePostalPatient" HorizontalAlignment="Left" Height="20" Margin="395,289,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="123" FontFamily="Century Gothic" FontSize="14" BorderBrush="White" Background="{x:Null}" BorderThickness="1" Foreground="White"/>
+        <TextBox x:Name="txtTelePatient" HorizontalAlignment="Left" Height="20" Margin="150,316,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="137" FontFamily="Century Gothic" FontSize="14" BorderBrush="White" Background="{x:Null}" BorderThickness="1" Foreground="White"/>
+        <ComboBox x:Name="cbRefPatient" HorizontalAlignment="Left" Margin="389,316,0,0" VerticalAlignment="Top" Width="130"
+                   IsSynchronizedWithCurrentItem="True"  ItemsSource="{Binding}" DisplayMemberPath="Prenom"/>
+
+
+        <GroupBox Header="  NOUVEAU DOSSIER PATIENT " HorizontalAlignment="Left" Height="107.73" Margin="629,205.27,0,0" VerticalAlignment="Top" Width="506" Foreground="White" BorderBrush="White" UseLayoutRounding="False"/>
+        <Label Content="Date admission" HorizontalAlignment="Left" Margin="641,231,0,0" VerticalAlignment="Top" Width="121" FontFamily="Century Gothic" Height="28" Foreground="White" FontSize="14" />
+        <DatePicker x:Name="dateAdmissionDossier" HorizontalAlignment="Left" Margin="768,233,0,0" VerticalAlignment="Top" Width="143" FontFamily="Century Gothic" FontSize="14"/>
+        <Label Content="NSS Patient" HorizontalAlignment="Left" Margin="932,234,0,0" VerticalAlignment="Top" Width="101" FontFamily="Century Gothic" Height="28" Foreground="White" FontSize="14" />
+        <ComboBox x:Name="cbNSSDossier" HorizontalAlignment="Left" Margin="1033,237,0,0" VerticalAlignment="Top" Width="74"/>
+        <Label Content="Id Médecin" HorizontalAlignment="Left" Margin="641,270,0,0" VerticalAlignment="Top" Width="101" FontFamily="Century Gothic" Height="28" Foreground="White" FontSize="14" />
+        <ComboBox x:Name="cbIDMedecinDossier" HorizontalAlignment="Left" Margin="769,273,0,0" VerticalAlignment="Top" Width="142"
+                  IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}" DisplayMemberPath="IdMedecin"/>
+        <Label Content="Numero lit" HorizontalAlignment="Left" Margin="932,267,0,0" VerticalAlignment="Top" Width="101" FontFamily="Century Gothic" Height="28" Foreground="White" FontSize="14" />
+        <ComboBox x:Name="cbNumeroLitDossier" HorizontalAlignment="Left" Margin="1033,270,0,0" VerticalAlignment="Top" Width="74"
+                  IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}" DisplayMemberPath="NumeroLit"/>
+        <Button x:Name="btnOpenDossier" Content="OUVERT DOSSIER" HorizontalAlignment="Left" Margin="944,379,0,0" VerticalAlignment="Top" Width="189" Height="30" Background="#FFFF9700" FontFamily="Century Gothic" Foreground="White" BorderBrush="#FFA84501" FontSize="14" FontWeight="Bold"/>
+
+        <Label x:Name="Recherche" Content="RECHERCHE PATIENT" HorizontalAlignment="Left" Margin="47,27,0,0" VerticalAlignment="Top" Width="435" FontFamily="Century Gothic" Height="46" Foreground="White" FontSize="26" RenderTransformOrigin="0.503,-0.152" />
+        <TextBox x:Name="txtRecherchePatient" HorizontalAlignment="Left" Height="25" Margin="54,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="284" FontFamily="Century Gothic" FontSize="14" BorderBrush="White" Background="#99005D9D" BorderThickness="1" Foreground="White"/>
+        <Button x:Name="btnRecheche" Content="RECHERCHE PATIENT" HorizontalAlignment="Left" Margin="354,95,0,0" VerticalAlignment="Top" Width="189" Height="30" Background="#FFFF9700" FontFamily="Century Gothic" Foreground="White" BorderBrush="#FFA84501" FontSize="14" FontWeight="Bold" Click="btnRecheche_Click"/>
+        <Label Content="Vous pouvez chercher par numéro de téléphone" HorizontalAlignment="Left" Margin="51,68,0,0" VerticalAlignment="Top" Width="494" FontFamily="Century Gothic" Height="27" Foreground="White" FontSize="14" />
+        <Button x:Name="btnLogout" Content="Me deconnecter" HorizontalAlignment="Left" Margin="1024,110,0,0" VerticalAlignment="Top" Width="130" Height="21" Background="#FFE81616" FontFamily="Century Gothic" FontWeight="Bold" FontSize="14" Foreground="#fff" BorderBrush="#fff" Click="btnLogout_Click">
+        </Button>
+        <Button x:Name="btnUpdate" Content="METTRE A JOUR PATIENT" HorizontalAlignment="Left" Margin="42,547,0,0" VerticalAlignment="Top" Width="186" Height="30" Background="#FFFF9700" FontFamily="Century Gothic" Foreground="White" BorderBrush="#FFFF9700" FontSize="14" FontWeight="Bold"/>
+        <Button x:Name="btnEmptyBox" Content="VIDE LES CHAMPS" HorizontalAlignment="Left" Margin="233,547,0,0" VerticalAlignment="Top" Width="137" Height="30" Background="#FFE81616" FontFamily="Century Gothic" Foreground="White" BorderBrush="#FFE81616" FontSize="14" FontWeight="Bold" Click="btnEmptyBox_Click"/>
+        <Label Content="NSS Patient" HorizontalAlignment="Left" Margin="639,438,0,0" VerticalAlignment="Top" Width="101" FontFamily="Century Gothic" Height="28" Foreground="White" FontSize="14" />
+        <Label x:Name="labNSS" Content="" HorizontalAlignment="Left" Margin="740,438,0,0" VerticalAlignment="Top" Width="119" FontFamily="Century Gothic" Height="28" Foreground="White" FontSize="16" Background="#6601356E" />
+        <Label Content="Parent" HorizontalAlignment="Left" Margin="639,471,0,0" VerticalAlignment="Top" Width="101" FontFamily="Century Gothic" Height="28" Foreground="White" FontSize="14" />
+        <Label x:Name="prenomParentShow" Content="" HorizontalAlignment="Left" Margin="740,471,0,0" VerticalAlignment="Top" Width="200" FontFamily="Century Gothic" Height="28" Foreground="White" FontSize="16" Background="#6601356E" />
+        <Label Content="Assurance" HorizontalAlignment="Left" Margin="639,504,0,0" VerticalAlignment="Top" Width="101" FontFamily="Century Gothic" Height="28" Foreground="White" FontSize="14" />
+        <Label x:Name="assuranceShow" Content="" HorizontalAlignment="Left" Margin="740,504,0,0" VerticalAlignment="Top" Width="200" FontFamily="Century Gothic" Height="28" Foreground="White" FontSize="16" Background="#6601356E" />
+        <Label x:Name="telPatientShow" Content="" HorizontalAlignment="Left" Margin="869,438,0,0" VerticalAlignment="Top" Width="119" FontFamily="Century Gothic" Height="28" Foreground="White" FontSize="16" Background="#6601356E" />
+        <Label x:Name="prenomPatientShow" Content="" HorizontalAlignment="Left" Margin="1003,438,0,0" VerticalAlignment="Top" Width="130" FontFamily="Century Gothic" Height="28" Foreground="White" FontSize="16" Background="#6601356E" />
+        <Label Content="# Téléphone" HorizontalAlignment="Left" Margin="864,418,0,0" VerticalAlignment="Top" Width="106" FontFamily="Century Gothic" Height="20" Foreground="White" FontSize="9" />
+        <Label Content="Prenom" HorizontalAlignment="Left" Margin="999,418,0,0" VerticalAlignment="Top" Width="106" FontFamily="Century Gothic" Height="20" Foreground="White" FontSize="9" />
+        <Label x:Name="NomParentShow" Content="" HorizontalAlignment="Left" Margin="951,471,0,0" VerticalAlignment="Top" Width="182" FontFamily="Century Gothic" Height="28" Foreground="White" FontSize="16" Background="#6601356E" />
+        <Label Content="ID Dossier" HorizontalAlignment="Left" Margin="639,537,0,0" VerticalAlignment="Top" Width="101" FontFamily="Century Gothic" Height="28" Foreground="White" FontSize="14" />
+        <Label x:Name="labNSS_Copy" Content="" HorizontalAlignment="Left" Margin="740,537,0,0" VerticalAlignment="Top" Width="200" FontFamily="Century Gothic" Height="28" Foreground="White" FontSize="16" Background="#6601356E" />
 
     </Grid>
 </Window>

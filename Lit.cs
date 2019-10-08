@@ -14,7 +14,7 @@ namespace HospitalNL
     
     public partial class Lit
     {
-        public int NumeroLit { get; set; }
+        public string NumeroLit { get; set; }
         public Nullable<bool> Occupe { get; set; }
         public int NumeroType { get; set; }
         public string IdDepartement { get; set; }

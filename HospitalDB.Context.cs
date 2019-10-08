@@ -13,10 +13,10 @@ namespace HospitalNL
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DBHospitalEntities : DbContext
+    public partial class HOSPITALEntities : DbContext
     {
-        public DBHospitalEntities()
-            : base("name=DBHospitalEntities")
+        public HOSPITALEntities()
+            : base("name=HOSPITALEntities")
         {
         }
     
@@ -28,12 +28,12 @@ namespace HospitalNL
         public virtual DbSet<CompagnieAssurance> CompagnieAssurance { get; set; }
         public virtual DbSet<Departement> Departement { get; set; }
         public virtual DbSet<DossierAdmission> DossierAdmission { get; set; }
-        public virtual DbSet<Lit> Lit { get; set; }
+        public virtual DbSet<Location> Location { get; set; }
         public virtual DbSet<Medecin> Medecin { get; set; }
         public virtual DbSet<Parent> Parent { get; set; }
         public virtual DbSet<Patient> Patient { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TypeLit> TypeLit { get; set; }
-        public virtual DbSet<Location> Location { get; set; }
+        public virtual DbSet<Lit> Lit { get; set; }
     }
 }

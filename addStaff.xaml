@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HospitalNL"
         mc:Ignorable="d"
-        Title="addStaff" Height="450" Width="400">
+        Title="addStaff" Height="450" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.Background>
         <ImageBrush ImageSource="img/fonde-Small.jpg"/>
     </Window.Background>
     <Grid>
         <Label x:Name="MENU" Content="Ajouter Staff" HorizontalAlignment="Left" Margin="40,46,0,0" VerticalAlignment="Top" Width="309" FontFamily="Century Gothic" Height="57" Foreground="White" FontWeight="Bold" FontSize="36" />
-        <Button x:Name="btnAddStaff" Content="AJOUTER" HorizontalAlignment="Left" Margin="142,357,0,0" VerticalAlignment="Top" Width="215" Height="36" Background="White" FontFamily="Century Gothic" FontWeight="Bold" FontSize="18" Foreground="#FF00336A" BorderBrush="#FF009FE3"/>
+        <Button x:Name="btnAddStaff" Content="AJOUTER" HorizontalAlignment="Left" Margin="142,357,0,0" VerticalAlignment="Top" Width="215" Height="36" Background="White" FontFamily="Century Gothic" FontWeight="Bold" FontSize="18" Foreground="#FF00336A" BorderBrush="#FF009FE3" Click="btnAddStaff_Click"/>
         <Label x:Name="labNom" Content="Nom" HorizontalAlignment="Left" Margin="40,125,0,0" VerticalAlignment="Top" Width="309" FontFamily="Century Gothic" Height="33" Foreground="White" FontWeight="Bold" FontSize="18" />
         <TextBox x:Name="txtNom" HorizontalAlignment="Left" Height="27" Margin="40,158,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317" FontFamily="Century Gothic" FontSize="16" BorderBrush="White" Background="{x:Null}" BorderThickness="1" Foreground="White"/>
         <Label Content="Prenom" HorizontalAlignment="Left" Margin="40,185,0,0" VerticalAlignment="Top" Width="309" FontFamily="Century Gothic" Height="33" Foreground="White" FontWeight="Bold" FontSize="18" />

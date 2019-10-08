@@ -15,14 +15,16 @@ namespace HospitalNL
     public partial class DossierAdmission
     {
         public int IdAdmission { get; set; }
-        public string ChirurgieProg { get; set; }
+        public Nullable<bool> ChirurgieProg { get; set; }
         public Nullable<System.DateTime> DateAdmission { get; set; }
         public Nullable<System.DateTime> DateChirurgie { get; set; }
         public Nullable<System.DateTime> DateConge { get; set; }
         public Nullable<int> NSS { get; set; }
-        public Nullable<int> NumeroLit { get; set; }
+        public string NumeroLit { get; set; }
         public Nullable<int> IdMedecin { get; set; }
+        public Nullable<int> IdLocation { get; set; }
     
+        public virtual Location Location { get; set; }
         public virtual Medecin Medecin { get; set; }
         public virtual Patient Patient { get; set; }
     }

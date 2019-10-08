@@ -23,5 +23,48 @@ namespace HospitalNL
         {
             InitializeComponent();
         }
+
+        private void cbIdMedecin_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Medecin M = ((Medecin)cbIdMedecin.SelectedItem);
+            labInfoNom.Content = M.Nom.ToString();
+            labInfoPrenom.Content = M.Prenom.ToString();
+            labInfoSpecialite.Content = M.Specialite.ToString();
+        }
+
+        private void refresh()
+        {
+            cbIdMedecin.DataContext = MainWindow.bdHospital.Medecin.ToList();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            refresh();
+        }
+
+        private void btnDeleteStaff_Click(object sender, RoutedEventArgs e)
+        {
+            Medecin M = ((Medecin)cbIdMedecin.SelectedItem);
+            
+            try
+            {
+
+                MessageBoxResult res = MessageBox.Show("Vous etes sur de supprimer le medecin ?", "Attention", MessageBoxButton.YesNo, MessageBoxImage.Question); 
+
+                if (res == MessageBoxResult.Yes)
+                {
+                    MainWindow.bdHospital.Medecin.Remove(M);
+                    MessageBox.Show("Modification Fait!", "Ajoute Succes", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MainWindow.bdHospital.SaveChanges();
+                    refresh();
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+        }
     }
 }
