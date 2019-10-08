@@ -17,10 +17,10 @@
         <TextBox x:Name="txtPrenom" HorizontalAlignment="Left" Height="27" Margin="40,255,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317" FontFamily="Century Gothic" FontSize="16" BorderBrush="White" Background="{x:Null}" BorderThickness="1" Foreground="White"/>
         <Label Content="Specialite" HorizontalAlignment="Left" Margin="40,287,0,0" VerticalAlignment="Top" Width="309" FontFamily="Century Gothic" Height="33" Foreground="White" FontWeight="Bold" FontSize="18" />
         <TextBox x:Name="txtSpecialite" HorizontalAlignment="Left" Height="27" Margin="40,320,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317" FontFamily="Century Gothic" FontSize="16" BorderBrush="White" Background="{x:Null}" BorderThickness="1" Foreground="White"/>
-        <Label x:Name="labId" Content="ID" HorizontalAlignment="Left" Margin="40,106,0,0" VerticalAlignment="Top" Width="309" FontFamily="Century Gothic" Height="33" Foreground="White" FontWeight="Bold" FontSize="18" />
+        <Label x:Name="labId" Content="Choisir par nom" HorizontalAlignment="Left" Margin="40,106,0,0" VerticalAlignment="Top" Width="309" FontFamily="Century Gothic" Height="33" Foreground="White" FontWeight="Bold" FontSize="18" />
         <Button x:Name="btnAddStaff" Content="Mettre a jour" HorizontalAlignment="Left" Margin="142,357,0,0" VerticalAlignment="Top" Width="215" Height="36" Background="White" FontFamily="Century Gothic" FontWeight="Bold" FontSize="18" Foreground="#FF00336A" BorderBrush="#FF009FE3" Click="btnAddStaff_Click"/>
-        <ComboBox x:Name="cbIdMedecin" HorizontalAlignment="Left" Margin="40,140,0,0" VerticalAlignment="Top" Width="66" Background="White" BorderBrush="{x:Null}" Foreground="#FF003366"
-                   IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}" DisplayMemberPath="IdMedecin" FontFamily="Century Gothic" FontWeight="Bold" SelectionChanged="cbIdMedecin_SelectionChanged"/>
+        <ComboBox x:Name="cbIdMedecin" HorizontalAlignment="Left" Margin="40,140,0,0" VerticalAlignment="Top" Width="317" Background="White" BorderBrush="{x:Null}" Foreground="#FF003366"
+                   IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}" DisplayMemberPath="Nom" FontFamily="Century Gothic" FontWeight="Bold" SelectionChanged="cbIdMedecin_SelectionChanged"/>
 
     </Grid>
 </Window>
