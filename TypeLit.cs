@@ -17,7 +17,7 @@ namespace HospitalNL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TypeLit()
         {
-            this.Lit = new HashSet<Lit>();
+            this.Lits = new HashSet<Lit>();
         }
     
         public int NumeroType { get; set; }
@@ -25,6 +25,6 @@ namespace HospitalNL
         public Nullable<decimal> Prix { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Lit> Lit { get; set; }
+        public virtual ICollection<Lit> Lits { get; set; }
     }
 }

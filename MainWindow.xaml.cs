@@ -21,7 +21,7 @@ namespace HospitalNL
     public partial class MainWindow : Window
 
     {
-        public static HOSPITALEntities bdHospital = new HOSPITALEntities();
+        public static HospitalEnt bdHospital = new HospitalEnt();
 
         string[,] usersHospital = new string[3, 2]
                 {{"admin","admin" },{"prepose" , "prepose" },{"medecin", "medecin"} };

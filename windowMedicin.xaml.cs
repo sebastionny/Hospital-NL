@@ -34,14 +34,12 @@ namespace HospitalNL
 
         private void refresh()
         {
-            cbIDDossier.DataContext = MainWindow.bdHospital.DossierAdmission.ToList();
-            dgDossier.ItemsSource = MainWindow.bdHospital.DossierAdmission.ToList();
+            cbIDDossier.DataContext = MainWindow.bdHospital.DossierAdmissions.ToList();
+            dgDossier.ItemsSource = MainWindow.bdHospital.DossierAdmissions.ToList();
         }
 
         private void btnDonnerConge_Click(object sender, RoutedEventArgs e)
         {
-
-
             try
             {
                 DossierAdmission DA = ((DossierAdmission)cbIDDossier.SelectedItem);
@@ -50,16 +48,18 @@ namespace HospitalNL
                 DA.DateConge = dkDateConge.SelectedDate;
                 DA.ChirurgieProg = true;
 
+                Lit LI = MainWindow.bdHospital.Lits.Where(l => l.NumeroLit == DA.NumeroLit).FirstOrDefault();
+                LI.Occupe = false;
+
                 MainWindow.bdHospital.SaveChanges();
                 MessageBox.Show("Modification Fait! La date de congé a été fixé", "La date de congé avec Succes", MessageBoxButton.OK, MessageBoxImage.Information);
+                
                 refresh();
             }
             catch (Exception ex)
             {
                 MessageBox.Show( ex.Message , "Erreur Asignation date conge" ,MessageBoxButton.OK , MessageBoxImage.Information);
-                
             }
-
         }
 
         private void cbIDDossier_SelectionChanged(object sender, SelectionChangedEventArgs e)

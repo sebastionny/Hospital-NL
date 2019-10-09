@@ -17,13 +17,13 @@ namespace HospitalNL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Departement()
         {
-            this.Lit = new HashSet<Lit>();
+            this.Lits = new HashSet<Lit>();
         }
     
         public string IdDepartement { get; set; }
         public string NomDepartement { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Lit> Lit { get; set; }
+        public virtual ICollection<Lit> Lits { get; set; }
     }
 }

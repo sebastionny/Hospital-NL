@@ -24,6 +24,7 @@ namespace HospitalNL
         public Nullable<int> IdMedecin { get; set; }
         public Nullable<int> IdLocation { get; set; }
     
+        public virtual Lit Lit { get; set; }
         public virtual Location Location { get; set; }
         public virtual Medecin Medecin { get; set; }
         public virtual Patient Patient { get; set; }

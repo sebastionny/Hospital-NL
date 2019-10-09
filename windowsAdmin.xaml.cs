@@ -48,7 +48,7 @@ namespace HospitalNL
             deleteStaff.ShowDialog();
         }
 
-        public void refresh() => gridConsultation.ItemsSource = MainWindow.bdHospital.Medecin.ToList();
+        public void refresh() => gridConsultation.ItemsSource = MainWindow.bdHospital.Medecins.ToList();
 
         private void Window_Activated(object sender, EventArgs e)
         {

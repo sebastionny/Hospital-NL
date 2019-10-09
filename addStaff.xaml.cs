@@ -35,7 +35,7 @@ namespace HospitalNL
             try
             {
                 if (valida()) { 
-                    MainWindow.bdHospital.Medecin.Add(M);
+                    MainWindow.bdHospital.Medecins.Add(M);
                     MainWindow.bdHospital.SaveChanges();
                     MessageBox.Show("Medecin ajouté", "Succes", MessageBoxButton.OK, MessageBoxImage.Information);
                     txtNom.Text = String.Empty;

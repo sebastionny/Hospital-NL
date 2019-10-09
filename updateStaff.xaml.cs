@@ -40,7 +40,7 @@ namespace HospitalNL
 
         private void refresh()
         {
-            cbIdMedecin.DataContext = MainWindow.bdHospital.Medecin.ToList();
+            cbIdMedecin.DataContext = MainWindow.bdHospital.Medecins.ToList();
         }
 
         private void btnAddStaff_Click(object sender, RoutedEventArgs e)
