@@ -34,7 +34,7 @@ namespace HospitalNL
 
         private void refresh()
         {
-            cbIdMedecin.DataContext = MainWindow.bdHospital.Medecin.ToList();
+            cbIdMedecin.DataContext = MainWindow.bdHospital.Medecins.ToList();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -53,7 +53,7 @@ namespace HospitalNL
 
                 if (res == MessageBoxResult.Yes)
                 {
-                    MainWindow.bdHospital.Medecin.Remove(M);
+                    MainWindow.bdHospital.Medecins.Remove(M);
                     MessageBox.Show("Modification Fait!", "Ajoute Succes", MessageBoxButton.OK, MessageBoxImage.Information);
                     MainWindow.bdHospital.SaveChanges();
                     refresh();

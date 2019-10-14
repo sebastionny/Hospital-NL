@@ -17,7 +17,7 @@ namespace HospitalNL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Parent()
         {
-            this.Patient = new HashSet<Patient>();
+            this.Patients = new HashSet<Patient>();
         }
     
         public int RefParent { get; set; }
@@ -30,6 +30,6 @@ namespace HospitalNL
         public string Telephone { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Patient> Patient { get; set; }
+        public virtual ICollection<Patient> Patients { get; set; }
     }
 }

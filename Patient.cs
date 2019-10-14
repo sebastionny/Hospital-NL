@@ -17,7 +17,7 @@ namespace HospitalNL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Patient()
         {
-            this.DossierAdmission = new HashSet<DossierAdmission>();
+            this.DossierAdmissions = new HashSet<DossierAdmission>();
         }
     
         public int NSS { get; set; }
@@ -34,7 +34,7 @@ namespace HospitalNL
     
         public virtual CompagnieAssurance CompagnieAssurance { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DossierAdmission> DossierAdmission { get; set; }
+        public virtual ICollection<DossierAdmission> DossierAdmissions { get; set; }
         public virtual Parent Parent { get; set; }
     }
 }

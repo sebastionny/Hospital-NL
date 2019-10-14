@@ -14,12 +14,20 @@ namespace HospitalNL
     
     public partial class Lit
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Lit()
+        {
+            this.DossierAdmissions = new HashSet<DossierAdmission>();
+        }
+    
         public string NumeroLit { get; set; }
         public Nullable<bool> Occupe { get; set; }
         public int NumeroType { get; set; }
         public string IdDepartement { get; set; }
     
         public virtual Departement Departement { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DossierAdmission> DossierAdmissions { get; set; }
         public virtual TypeLit TypeLit { get; set; }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="HOSPITALModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="HOSPITALModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CompagnieAssurance">
           <Key>
             <PropertyRef Name="IdCompagnie" />
@@ -33,13 +33,9 @@
           <Property Name="IdMedecin" Type="int" />
           <Property Name="IdLocation" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'HOSPITAL.dbo.Lit' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Lit">
           <Key>
             <PropertyRef Name="NumeroLit" />
-            <PropertyRef Name="NumeroType" />
-            <PropertyRef Name="IdDepartement" />
           </Key>
           <Property Name="NumeroLit" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="Occupe" Type="bit" />
@@ -110,6 +106,18 @@ warning 6002: The table/view 'HOSPITAL.dbo.Lit' does not have a primary key defi
           <Property Name="Description" Type="nchar" MaxLength="100" />
           <Property Name="Prix" Type="money" />
         </EntityType>
+        <Association Name="FK_DossierAdmission_Lit">
+          <End Role="Lit" Type="Self.Lit" Multiplicity="0..1" />
+          <End Role="DossierAdmission" Type="Self.DossierAdmission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lit">
+              <PropertyRef Name="NumeroLit" />
+            </Principal>
+            <Dependent Role="DossierAdmission">
+              <PropertyRef Name="NumeroLit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DossierAdmission_Location">
           <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
           <End Role="DossierAdmission" Type="Self.DossierAdmission" Multiplicity="*" />
@@ -198,20 +206,17 @@ warning 6002: The table/view 'HOSPITAL.dbo.Lit' does not have a primary key defi
           <EntitySet Name="CompagnieAssurance" EntityType="Self.CompagnieAssurance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Departement" EntityType="Self.Departement" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DossierAdmission" EntityType="Self.DossierAdmission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lit" EntityType="Self.Lit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Medecin" EntityType="Self.Medecin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Parent" EntityType="Self.Parent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Patient" EntityType="Self.Patient" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeLit" EntityType="Self.TypeLit" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Lit" EntityType="Self.Lit" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Lit].[NumeroLit] AS [NumeroLit], 
-    [Lit].[Occupe] AS [Occupe], 
-    [Lit].[NumeroType] AS [NumeroType], 
-    [Lit].[IdDepartement] AS [IdDepartement]
-    FROM [dbo].[Lit] AS [Lit]</DefiningQuery>
-          </EntitySet>
+          <AssociationSet Name="FK_DossierAdmission_Lit" Association="Self.FK_DossierAdmission_Lit">
+            <End Role="Lit" EntitySet="Lit" />
+            <End Role="DossierAdmission" EntitySet="DossierAdmission" />
+          </AssociationSet>
           <AssociationSet Name="FK_DossierAdmission_Location" Association="Self.FK_DossierAdmission_Location">
             <End Role="Location" EntitySet="Location" />
             <End Role="DossierAdmission" EntitySet="DossierAdmission" />
@@ -241,7 +246,8 @@ warning 6002: The table/view 'HOSPITAL.dbo.Lit' does not have a primary key defi
             <End Role="Patient" EntitySet="Patient" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HOSPITALModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -251,7 +257,7 @@ warning 6002: The table/view 'HOSPITAL.dbo.Lit' does not have a primary key defi
           </Key>
           <Property Name="IdCompagnie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NomCompagnie" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Patient" Relationship="Self.FK_Patient_CompagnieAssurance" FromRole="CompagnieAssurance" ToRole="Patient" />
+          <NavigationProperty Name="Patients" Relationship="Self.FK_Patient_CompagnieAssurance" FromRole="CompagnieAssurance" ToRole="Patient" />
         </EntityType>
         <EntityType Name="Departement">
           <Key>
@@ -259,7 +265,7 @@ warning 6002: The table/view 'HOSPITAL.dbo.Lit' does not have a primary key defi
           </Key>
           <Property Name="IdDepartement" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="NomDepartement" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Lit" Relationship="Self.FK_Lit_Departement" FromRole="Departement" ToRole="Lit" />
+          <NavigationProperty Name="Lits" Relationship="Self.FK_Lit_Departement" FromRole="Departement" ToRole="Lit" />
         </EntityType>
         <EntityType Name="DossierAdmission">
           <Key>
@@ -274,9 +280,22 @@ warning 6002: The table/view 'HOSPITAL.dbo.Lit' does not have a primary key defi
           <Property Name="NumeroLit" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="IdMedecin" Type="Int32" />
           <Property Name="IdLocation" Type="Int32" />
+          <NavigationProperty Name="Lit" Relationship="Self.FK_DossierAdmission_Lit" FromRole="DossierAdmission" ToRole="Lit" />
           <NavigationProperty Name="Location" Relationship="Self.FK_DossierAdmission_Location" FromRole="DossierAdmission" ToRole="Location" />
-          <NavigationProperty Name="Medecin" Relationship="Self.FK_DossierAdmission_Medecin" FromRole="DossierAdmission" ToRole="Medecin" />
+          <NavigationProperty Name="Medecin" Relationship="Self.FK_DossierAdmission_Medecin1" FromRole="DossierAdmission" ToRole="Medecin" />
           <NavigationProperty Name="Patient" Relationship="Self.FK_DossierAdmission_Patient" FromRole="DossierAdmission" ToRole="Patient" />
+        </EntityType>
+        <EntityType Name="Lit">
+          <Key>
+            <PropertyRef Name="NumeroLit" />
+          </Key>
+          <Property Name="NumeroLit" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Occupe" Type="Boolean" />
+          <Property Name="NumeroType" Type="Int32" Nullable="false" />
+          <Property Name="IdDepartement" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Departement" Relationship="Self.FK_Lit_Departement" FromRole="Lit" ToRole="Departement" />
+          <NavigationProperty Name="DossierAdmissions" Relationship="Self.FK_DossierAdmission_Lit" FromRole="Lit" ToRole="DossierAdmission" />
+          <NavigationProperty Name="TypeLit" Relationship="Self.FK_Lit_TypeLit" FromRole="Lit" ToRole="TypeLit" />
         </EntityType>
         <EntityType Name="Location">
           <Key>
@@ -285,7 +304,7 @@ warning 6002: The table/view 'HOSPITAL.dbo.Lit' does not have a primary key defi
           <Property Name="IdLocation" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Description" Type="String" MaxLength="80" FixedLength="true" Unicode="true" />
           <Property Name="Prix" Type="Decimal" Precision="19" Scale="4" />
-          <NavigationProperty Name="DossierAdmission" Relationship="Self.FK_DossierAdmission_Location" FromRole="Location" ToRole="DossierAdmission" />
+          <NavigationProperty Name="DossierAdmissions" Relationship="Self.FK_DossierAdmission_Location" FromRole="Location" ToRole="DossierAdmission" />
         </EntityType>
         <EntityType Name="Medecin">
           <Key>
@@ -295,7 +314,7 @@ warning 6002: The table/view 'HOSPITAL.dbo.Lit' does not have a primary key defi
           <Property Name="Nom" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="Prenom" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="Specialite" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="DossierAdmission" Relationship="Self.FK_DossierAdmission_Medecin" FromRole="Medecin" ToRole="DossierAdmission" />
+          <NavigationProperty Name="DossierAdmissions" Relationship="Self.FK_DossierAdmission_Medecin1" FromRole="Medecin" ToRole="DossierAdmission" />
         </EntityType>
         <EntityType Name="Parent">
           <Key>
@@ -309,7 +328,7 @@ warning 6002: The table/view 'HOSPITAL.dbo.Lit' does not have a primary key defi
           <Property Name="Province" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="CodePostal" Type="String" MaxLength="7" FixedLength="true" Unicode="true" />
           <Property Name="Telephone" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Patient" Relationship="Self.FK_Patient_Parent" FromRole="Parent" ToRole="Patient" />
+          <NavigationProperty Name="Patients" Relationship="Self.FK_Patient_Parent" FromRole="Parent" ToRole="Patient" />
         </EntityType>
         <EntityType Name="Patient">
           <Key>
@@ -327,10 +346,10 @@ warning 6002: The table/view 'HOSPITAL.dbo.Lit' does not have a primary key defi
           <Property Name="IdCompagnie" Type="Int32" />
           <Property Name="RefParent" Type="Int32" />
           <NavigationProperty Name="CompagnieAssurance" Relationship="Self.FK_Patient_CompagnieAssurance" FromRole="Patient" ToRole="CompagnieAssurance" />
-          <NavigationProperty Name="DossierAdmission" Relationship="Self.FK_DossierAdmission_Patient" FromRole="Patient" ToRole="DossierAdmission" />
+          <NavigationProperty Name="DossierAdmissions" Relationship="Self.FK_DossierAdmission_Patient" FromRole="Patient" ToRole="DossierAdmission" />
           <NavigationProperty Name="Parent" Relationship="Self.FK_Patient_Parent" FromRole="Patient" ToRole="Parent" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
+        <EntityType Name="sysdiagram">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
@@ -347,20 +366,7 @@ warning 6002: The table/view 'HOSPITAL.dbo.Lit' does not have a primary key defi
           <Property Name="NumeroType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Description" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
           <Property Name="Prix" Type="Decimal" Precision="19" Scale="4" />
-          <NavigationProperty Name="Lit" Relationship="Self.FK_Lit_TypeLit" FromRole="TypeLit" ToRole="Lit" />
-        </EntityType>
-        <EntityType Name="Lit">
-          <Key>
-            <PropertyRef Name="NumeroLit" />
-            <PropertyRef Name="NumeroType" />
-            <PropertyRef Name="IdDepartement" />
-          </Key>
-          <Property Name="NumeroLit" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Occupe" Type="Boolean" />
-          <Property Name="NumeroType" Type="Int32" Nullable="false" />
-          <Property Name="IdDepartement" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Departement" Relationship="Self.FK_Lit_Departement" FromRole="Lit" ToRole="Departement" />
-          <NavigationProperty Name="TypeLit" Relationship="Self.FK_Lit_TypeLit" FromRole="Lit" ToRole="TypeLit" />
+          <NavigationProperty Name="Lits" Relationship="Self.FK_Lit_TypeLit" FromRole="TypeLit" ToRole="Lit" />
         </EntityType>
         <Association Name="FK_Patient_CompagnieAssurance">
           <End Role="CompagnieAssurance" Type="Self.CompagnieAssurance" Multiplicity="0..1" />
@@ -386,6 +392,18 @@ warning 6002: The table/view 'HOSPITAL.dbo.Lit' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DossierAdmission_Lit">
+          <End Role="Lit" Type="Self.Lit" Multiplicity="0..1" />
+          <End Role="DossierAdmission" Type="Self.DossierAdmission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lit">
+              <PropertyRef Name="NumeroLit" />
+            </Principal>
+            <Dependent Role="DossierAdmission">
+              <PropertyRef Name="NumeroLit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DossierAdmission_Location">
           <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
           <End Role="DossierAdmission" Type="Self.DossierAdmission" Multiplicity="*" />
@@ -398,7 +416,7 @@ warning 6002: The table/view 'HOSPITAL.dbo.Lit' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DossierAdmission_Medecin">
+        <Association Name="FK_DossierAdmission_Medecin1">
           <End Role="Medecin" Type="Self.Medecin" Multiplicity="0..1" />
           <End Role="DossierAdmission" Type="Self.DossierAdmission" Multiplicity="*" />
           <ReferentialConstraint>
@@ -422,18 +440,6 @@ warning 6002: The table/view 'HOSPITAL.dbo.Lit' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Patient_Parent">
-          <End Role="Parent" Type="Self.Parent" Multiplicity="0..1" />
-          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Parent">
-              <PropertyRef Name="RefParent" />
-            </Principal>
-            <Dependent Role="Patient">
-              <PropertyRef Name="RefParent" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Lit_TypeLit">
           <End Role="TypeLit" Type="Self.TypeLit" Multiplicity="1" />
           <End Role="Lit" Type="Self.Lit" Multiplicity="*" />
@@ -446,44 +452,60 @@ warning 6002: The table/view 'HOSPITAL.dbo.Lit' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="HOSPITALEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="CompagnieAssurance" EntityType="Self.CompagnieAssurance" />
-          <EntitySet Name="Departement" EntityType="Self.Departement" />
-          <EntitySet Name="DossierAdmission" EntityType="Self.DossierAdmission" />
-          <EntitySet Name="Location" EntityType="Self.Location" />
-          <EntitySet Name="Medecin" EntityType="Self.Medecin" />
-          <EntitySet Name="Parent" EntityType="Self.Parent" />
-          <EntitySet Name="Patient" EntityType="Self.Patient" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="TypeLit" EntityType="Self.TypeLit" />
-          <EntitySet Name="Lit" EntityType="Self.Lit" />
+        <Association Name="FK_Patient_Parent">
+          <End Role="Parent" Type="Self.Parent" Multiplicity="0..1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parent">
+              <PropertyRef Name="RefParent" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="RefParent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HospitalEnt" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CompagnieAssurances" EntityType="Self.CompagnieAssurance" />
+          <EntitySet Name="Departements" EntityType="Self.Departement" />
+          <EntitySet Name="DossierAdmissions" EntityType="Self.DossierAdmission" />
+          <EntitySet Name="Lits" EntityType="Self.Lit" />
+          <EntitySet Name="Locations" EntityType="Self.Location" />
+          <EntitySet Name="Medecins" EntityType="Self.Medecin" />
+          <EntitySet Name="Parents" EntityType="Self.Parent" />
+          <EntitySet Name="Patients" EntityType="Self.Patient" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TypeLits" EntityType="Self.TypeLit" />
           <AssociationSet Name="FK_Patient_CompagnieAssurance" Association="Self.FK_Patient_CompagnieAssurance">
-            <End Role="CompagnieAssurance" EntitySet="CompagnieAssurance" />
-            <End Role="Patient" EntitySet="Patient" />
+            <End Role="CompagnieAssurance" EntitySet="CompagnieAssurances" />
+            <End Role="Patient" EntitySet="Patients" />
           </AssociationSet>
           <AssociationSet Name="FK_Lit_Departement" Association="Self.FK_Lit_Departement">
-            <End Role="Departement" EntitySet="Departement" />
-            <End Role="Lit" EntitySet="Lit" />
+            <End Role="Departement" EntitySet="Departements" />
+            <End Role="Lit" EntitySet="Lits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DossierAdmission_Lit" Association="Self.FK_DossierAdmission_Lit">
+            <End Role="Lit" EntitySet="Lits" />
+            <End Role="DossierAdmission" EntitySet="DossierAdmissions" />
           </AssociationSet>
           <AssociationSet Name="FK_DossierAdmission_Location" Association="Self.FK_DossierAdmission_Location">
-            <End Role="Location" EntitySet="Location" />
-            <End Role="DossierAdmission" EntitySet="DossierAdmission" />
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="DossierAdmission" EntitySet="DossierAdmissions" />
           </AssociationSet>
-          <AssociationSet Name="FK_DossierAdmission_Medecin" Association="Self.FK_DossierAdmission_Medecin">
-            <End Role="Medecin" EntitySet="Medecin" />
-            <End Role="DossierAdmission" EntitySet="DossierAdmission" />
+          <AssociationSet Name="FK_DossierAdmission_Medecin1" Association="Self.FK_DossierAdmission_Medecin1">
+            <End Role="Medecin" EntitySet="Medecins" />
+            <End Role="DossierAdmission" EntitySet="DossierAdmissions" />
           </AssociationSet>
           <AssociationSet Name="FK_DossierAdmission_Patient" Association="Self.FK_DossierAdmission_Patient">
-            <End Role="Patient" EntitySet="Patient" />
-            <End Role="DossierAdmission" EntitySet="DossierAdmission" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Patient_Parent" Association="Self.FK_Patient_Parent">
-            <End Role="Parent" EntitySet="Parent" />
-            <End Role="Patient" EntitySet="Patient" />
+            <End Role="Patient" EntitySet="Patients" />
+            <End Role="DossierAdmission" EntitySet="DossierAdmissions" />
           </AssociationSet>
           <AssociationSet Name="FK_Lit_TypeLit" Association="Self.FK_Lit_TypeLit">
-            <End Role="TypeLit" EntitySet="TypeLit" />
-            <End Role="Lit" EntitySet="Lit" />
+            <End Role="TypeLit" EntitySet="TypeLits" />
+            <End Role="Lit" EntitySet="Lits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patient_Parent" Association="Self.FK_Patient_Parent">
+            <End Role="Parent" EntitySet="Parents" />
+            <End Role="Patient" EntitySet="Patients" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -491,8 +513,8 @@ warning 6002: The table/view 'HOSPITAL.dbo.Lit' does not have a primary key defi
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="HOSPITALModelStoreContainer" CdmEntityContainer="HOSPITALEntities">
-          <EntitySetMapping Name="CompagnieAssurance">
+        <EntityContainerMapping StorageEntityContainer="HOSPITALModelStoreContainer" CdmEntityContainer="HospitalEnt">
+          <EntitySetMapping Name="CompagnieAssurances">
             <EntityTypeMapping TypeName="HOSPITALModel.CompagnieAssurance">
               <MappingFragment StoreEntitySet="CompagnieAssurance">
                 <ScalarProperty Name="IdCompagnie" ColumnName="IdCompagnie" />
@@ -500,7 +522,7 @@ warning 6002: The table/view 'HOSPITAL.dbo.Lit' does not have a primary key defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Departement">
+          <EntitySetMapping Name="Departements">
             <EntityTypeMapping TypeName="HOSPITALModel.Departement">
               <MappingFragment StoreEntitySet="Departement">
                 <ScalarProperty Name="IdDepartement" ColumnName="IdDepartement" />
@@ -508,7 +530,7 @@ warning 6002: The table/view 'HOSPITAL.dbo.Lit' does not have a primary key defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DossierAdmission">
+          <EntitySetMapping Name="DossierAdmissions">
             <EntityTypeMapping TypeName="HOSPITALModel.DossierAdmission">
               <MappingFragment StoreEntitySet="DossierAdmission">
                 <ScalarProperty Name="IdAdmission" ColumnName="IdAdmission" />
@@ -523,7 +545,17 @@ warning 6002: The table/view 'HOSPITAL.dbo.Lit' does not have a primary key defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Location">
+          <EntitySetMapping Name="Lits">
+            <EntityTypeMapping TypeName="HOSPITALModel.Lit">
+              <MappingFragment StoreEntitySet="Lit">
+                <ScalarProperty Name="NumeroLit" ColumnName="NumeroLit" />
+                <ScalarProperty Name="Occupe" ColumnName="Occupe" />
+                <ScalarProperty Name="NumeroType" ColumnName="NumeroType" />
+                <ScalarProperty Name="IdDepartement" ColumnName="IdDepartement" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
             <EntityTypeMapping TypeName="HOSPITALModel.Location">
               <MappingFragment StoreEntitySet="Location">
                 <ScalarProperty Name="IdLocation" ColumnName="IdLocation" />
@@ -532,7 +564,7 @@ warning 6002: The table/view 'HOSPITAL.dbo.Lit' does not have a primary key defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Medecin">
+          <EntitySetMapping Name="Medecins">
             <EntityTypeMapping TypeName="HOSPITALModel.Medecin">
               <MappingFragment StoreEntitySet="Medecin">
                 <ScalarProperty Name="IdMedecin" ColumnName="IdMedecin" />
@@ -542,7 +574,7 @@ warning 6002: The table/view 'HOSPITAL.dbo.Lit' does not have a primary key defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Parent">
+          <EntitySetMapping Name="Parents">
             <EntityTypeMapping TypeName="HOSPITALModel.Parent">
               <MappingFragment StoreEntitySet="Parent">
                 <ScalarProperty Name="RefParent" ColumnName="RefParent" />
@@ -556,7 +588,7 @@ warning 6002: The table/view 'HOSPITAL.dbo.Lit' does not have a primary key defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Patient">
+          <EntitySetMapping Name="Patients">
             <EntityTypeMapping TypeName="HOSPITALModel.Patient">
               <MappingFragment StoreEntitySet="Patient">
                 <ScalarProperty Name="NSS" ColumnName="NSS" />
@@ -574,7 +606,7 @@ warning 6002: The table/view 'HOSPITAL.dbo.Lit' does not have a primary key defi
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="HOSPITALModel.sysdiagrams">
+            <EntityTypeMapping TypeName="HOSPITALModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -584,22 +616,12 @@ warning 6002: The table/view 'HOSPITAL.dbo.Lit' does not have a primary key defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TypeLit">
+          <EntitySetMapping Name="TypeLits">
             <EntityTypeMapping TypeName="HOSPITALModel.TypeLit">
               <MappingFragment StoreEntitySet="TypeLit">
                 <ScalarProperty Name="NumeroType" ColumnName="NumeroType" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Prix" ColumnName="Prix" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Lit">
-            <EntityTypeMapping TypeName="HOSPITALModel.Lit">
-              <MappingFragment StoreEntitySet="Lit">
-                <ScalarProperty Name="NumeroLit" ColumnName="NumeroLit" />
-                <ScalarProperty Name="Occupe" ColumnName="Occupe" />
-                <ScalarProperty Name="NumeroType" ColumnName="NumeroType" />
-                <ScalarProperty Name="IdDepartement" ColumnName="IdDepartement" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -617,7 +639,7 @@ warning 6002: The table/view 'HOSPITAL.dbo.Lit' does not have a primary key defi
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
